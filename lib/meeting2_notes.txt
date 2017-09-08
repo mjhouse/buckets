@@ -1,0 +1,18 @@
+>File Manager
+
+
+An application that watches a directory, applies rules to the files in the directory, and then moves the files to certain locations based on the rules in that directory
+
+An application that automatically organizes files by specific rules that the user inputs.
+
+Our program is a file organization system. It watches a user selected directory , then applies rules that are also selected by the user. These rules determine where the files are moved and how they are organized.  
+
+---
+
+Program runs in an infinite loop in the background , until it gets a new file event
+
+----
+
+Filter 1 
+
+"xyz"  , a directory 
