@@ -1,0 +1,16 @@
+Minutes/Notes Meeting 1
+Team 1:
+	Jackson Whaley
+	Joowon Lee
+	Michael House
+
+Requirements:
+	1. GUI
+	2. Text formatting/processing
+	3. Graphics (can be manipulated/altered by user)
+	4. Database
+	5. Config file/settings for application
+
+Proposed project ideas:
+	1. Movie consumption tracker (letterboxd/goodreads etc. using MovieDB)
+	2. Image viewer/organizer
