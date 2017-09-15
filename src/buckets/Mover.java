@@ -6,7 +6,6 @@
 package buckets;
 
 // imports
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,27 +16,24 @@ import java.nio.file.Path;
  * @author mhouse
  */
 public class Mover {
-    public final String source;
-    public final String destination;
+    private String source;
+    private String destination;
     
     
-    public Mover ( String src, String dst ) {
-	source = src;
-	destination = dst;
+    public Mover () {
     }
     
     /**
      * 
      * @return true if the file was moved successfully, else false 
      */
-    public Boolean move () {
-	Path file = Paths.get(source);
-	Path dir = Paths.get(destination, file.toString());
+    public Boolean move ( String src, String dst  ) {
+	source = src;
+	destination = dst;
 	
-	/* Check that:
-		The file exists and is NOT a directory 
-		The dir exists and IS a directory
-	*/
+	Path file = Paths.get(source);
+	Path dir = Paths.get(destination, "test.txt");
+	
 	try {
 	    Files.move(file, dir);
 	    return true;
@@ -47,6 +43,24 @@ public class Mover {
 	
 	// if we get here, the file didn't move.
 	return false;
+    }
+    
+    /* ---------------------------------------------------------------------- */
+    // Setters/ Getters
+    public void setSource ( String src ) {
+	source = src;
+    }
+    
+    public String getSource () {
+	return source;
+    }
+
+    public void setDestination ( String dst ) {
+	destination = dst;
+    }
+    
+    public String getDestination () {
+	return destination;
     }
     
 }
