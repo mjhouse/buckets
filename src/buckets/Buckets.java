@@ -17,6 +17,8 @@ public class Buckets {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("This is the project");  //This is a comment
+        GUI frame = new GUI();
+        frame.setVisible(true);
     }
     /** Set up a new laptop and testing git -Mike*/
     
