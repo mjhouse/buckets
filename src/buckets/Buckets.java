@@ -18,7 +18,6 @@ public class Buckets {
         // TODO code application logic here
         System.out.println("This is the project");  //This is a comment
     }
-    /**Dipen was here first*/
-    /**Jackson was here*/
-    /**Joowon was here - today is Friday, 9-8-17 */
+    /** Set up a new laptop and testing git -Mike*/
+    
 }
