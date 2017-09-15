@@ -15,9 +15,7 @@ public class Buckets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("This is the project");  //This is a comment
+        	
     }
-    /** Set up a new laptop and testing git -Mike*/
     
 }
