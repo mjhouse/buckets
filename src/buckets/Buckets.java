@@ -15,7 +15,8 @@ public class Buckets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        	
+        Watcher w = new Watcher("/home/mhouse/Downloads","/home/mhouse/Videos");
+	w.run();
     }
     
 }
