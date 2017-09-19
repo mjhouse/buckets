@@ -10,6 +10,10 @@
 <project name="buckets" default="default" basedir=".">
     <description>Builds, tests, and runs the project buckets.</description>
     <import file="nbproject/build-impl.xml"/>
+
+	<property name="dist.javadoc.dir" value="docs"/>
+	<mkdir dir="${dist.javadoc.dir}"/>
+
     <!--
 
     There exist several targets which are by default empty and which can be 
