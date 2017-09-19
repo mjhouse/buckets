@@ -59,14 +59,14 @@ public class Watcher {
     }
     
     /**
-     * launches the 'run' method asynchronously
+     * begin watching directories
      */
     public void start () {
 	CompletableFuture.runAsync(this::run);
     }
     
     /**
-     * signals the run method to exit.
+     * stop watching directories
      */
     public void stop () {
 	this.done = true;
