@@ -18,4 +18,5 @@ will be moved to the location specified by the rule.
 ## Documentation:
 
 Javadocs are available at: https://mjhouse.github.io/buckets/
+
 Task board available here: https://github.com/mjhouse/buckets/projects/1
