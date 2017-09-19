@@ -22,6 +22,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchEvent;
 
+// async
+import java.util.concurrent.CompletableFuture;
+
 /**
  * watches a given collection of directories and notifies
  * the rule manager when files are created.
@@ -31,6 +34,7 @@ import java.nio.file.WatchEvent;
 public class Watcher {
     private ArrayList<Path> directories;
     private WatchService watcher;
+    private Boolean done;
     
     /**
      * 
@@ -38,6 +42,7 @@ public class Watcher {
      */
     public Watcher ( String...dirs ) {
 	directories = new ArrayList();
+	done = false;
 	
 	try {
 	    watcher = FileSystems.getDefault().newWatchService();
@@ -54,12 +59,26 @@ public class Watcher {
     }
     
     /**
+     * launches the 'run' method asynchronously
+     */
+    public void start () {
+	CompletableFuture.runAsync(this::run);
+    }
+    
+    /**
+     * signals the run method to exit.
+     */
+    public void stop () {
+	this.done = true;
+    }
+    
+    /**
      * Begins watching the target directories, and passes 
      * new file events to the rule manager.
      */
-    public void run () {
+    private void run () {
 	WatchKey key;
-	while (true) {
+	while (!this.done) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
             
@@ -78,8 +97,9 @@ public class Watcher {
                 // do something with the absolute path.
 		System.out.println(abspath);
 	    }
-	    Boolean valid = key.reset();
-	    if(!valid) break;
+	    
+	    if(!key.reset())
+		break;
 	}
     }
     
