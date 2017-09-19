@@ -23,7 +23,9 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchEvent;
 
 /**
- *
+ * watches a given collection of directories and notifies
+ * the rule manager when files are created.
+ * 
  * @author mhouse
  */
 public class Watcher {
@@ -47,23 +49,69 @@ public class Watcher {
 	}
     }
     
+    /**
+     * Begins watching the target directories, and passes 
+     * new file events to the rule manager.
+     */
     public void run () {
-	// watch the given directories
 	WatchKey key;
 	while (true) {
+            // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
+            
+            // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
-		//process
+		// get the environment from the event
 		WatchEvent<Path> ev = (WatchEvent<Path>)event;
 
+                // get the directory the event occurs in
 		Path dir = (Path)key.watchable();
+                
+                // build an absolute path with the directory and 
+                // file name.
 		Path abspath = dir.resolve(ev.context());
 
+                // do something with the absolute path.
 		System.out.println(abspath);
 	    }
 	    Boolean valid = key.reset();
 	    if(!valid) break;
 	}
+    }
+    
+    /* ---------------------------------------------------------------------- */
+    /* Getters/Setters */
+    
+    /**
+     * 
+     * @return the directories being watched 
+     */
+    public ArrayList<Path> getWatched () {
+        return this.directories;
+    }
+    
+    /**
+     * 
+     * @param p paths to begin watching 
+     */
+    public void setWatched ( ArrayList<Path> p ) {
+        this.directories = p;
+    }
+    
+    /**
+     * 
+     * @return the watchservice being used
+     */
+    public WatchService getWatcher () {
+        return this.watcher;
+    }
+    
+    /**
+     * 
+     * @param w set a new watcher 
+     */
+    public void setWatcher ( WatchService w ) {
+        this.watcher = w;
     }
     
 }

@@ -5,6 +5,12 @@
  */
 package buckets;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
+import buckets.actions.Action;
+import buckets.actions.Move;
+
 /**
  *
  * @author blankie
@@ -15,8 +21,12 @@ public class Buckets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Watcher w = new Watcher("/home/mhouse/Downloads","/home/mhouse/Videos");
-	w.run();
+        try {
+            Action a = new Move(Paths.get("/home/mhouse/Videos"));
+            a.apply(Paths.get("/home/mhouse/test.txt"));   
+        } catch (IOException e) {
+            
+        }
     }
     
 }
