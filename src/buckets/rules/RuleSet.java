@@ -7,14 +7,16 @@ package buckets.rules;
 
 // system imports
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.nio.file.Path;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
  * @author mhouse
  */
-public class RuleSet {
+public class RuleSet implements Iterable<Rule> {
     private ArrayList<Rule> rules;
     
     /**
@@ -31,7 +33,7 @@ public class RuleSet {
      */
     public RuleSet ( Rule... nr ) {
 	rules = new ArrayList();
-	for ( Rule r : nr ) rules.add(r);
+	rules.addAll(Arrays.asList(nr));
     }
     
     /**
@@ -78,5 +80,14 @@ public class RuleSet {
 		System.out.println(e);
 	    }
 	}
+    }
+    
+    /**
+     * implementation for iterable interface
+     * @return iterator over rules 
+     */
+    @Override
+    public Iterator<Rule> iterator () {
+	return rules.iterator();
     }
 }

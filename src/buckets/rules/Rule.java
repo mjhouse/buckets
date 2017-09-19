@@ -49,6 +49,7 @@ public class Rule {
      * 
      * @param p the path to match 
      * @throws IOException 
+     * @return bool indicating match
      */
     public Boolean apply ( Path p ) throws IOException {
         Matcher matcher = pattern.matcher(p.toString());
