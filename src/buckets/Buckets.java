@@ -5,6 +5,13 @@
  */
 package buckets;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.lang.Thread;
+
+import buckets.actions.Action;
+import buckets.actions.Move;
+
 /**
  *
  * @author blankie
@@ -20,6 +27,5 @@ public class Buckets {
         GUI frame = new GUI();
         frame.setVisible(true);
     }
-    /** Set up a new laptop and testing git -Mike*/
     
 }
