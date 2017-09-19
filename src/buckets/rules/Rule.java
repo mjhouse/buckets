@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buckets;
+package buckets.rules;
 
 // local imports
 import buckets.actions.Action;
@@ -22,10 +22,10 @@ import java.nio.file.Path;
  */
 public class Rule {
     private final Pattern pattern;
-    private final Action action;
+    private Action action;
     
     /**
-     * 
+     * construct a rule with a regex pattern and an action
      * @param r the regular expression pattern to match with
      * @param a the action to apply to the matched path
      */
@@ -35,16 +35,41 @@ public class Rule {
     }
     
     /**
+     * construct a rule with only a pattern
+     * @param r the regular expression patter to match with
+     */
+    public Rule ( String r ) {
+	pattern = Pattern.compile(r);
+	action = null;
+    }
+    
+    /**
      * if the regex pattern matches the given path (p)
      * then the rule's action will be applied.
      * 
      * @param p the path to match 
      * @throws IOException 
      */
-    public void apply ( Path p ) throws IOException {
+    public Boolean apply ( Path p ) throws IOException {
         Matcher matcher = pattern.matcher(p.toString());
-        if (matcher.matches()) {
-            this.action.apply( p );
-        }
+	Boolean match = matcher.matches(); 
+        if (match && action!=null) action.apply( p );
+	return match;
+    }
+    
+    /**
+     * get the currently set action for this rule
+     * @return the current action for this rule 
+     */
+    public Action getAction () {
+	return action;
+    }
+    
+    /**
+     * set a new action for this rule
+     * @param a the new action to apply
+     */
+    public void setAction ( Action a ) {
+	action = a;
     }
 }

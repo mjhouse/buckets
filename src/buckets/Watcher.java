@@ -5,6 +5,8 @@
  */
 package buckets;
 
+import buckets.rules.RuleSet;
+
 // data structures
 import java.util.ArrayList;
 import java.util.Map;
@@ -33,16 +35,17 @@ import java.util.concurrent.CompletableFuture;
  */
 public class Watcher {
     private ArrayList<Path> directories;
+    private RuleSet rules;
     private WatchService watcher;
-    private Boolean done;
+    private Boolean running;
     
     /**
      * 
-     * @param dirs vararg directories to watch
+     * @param dirs directories to watch
      */
     public Watcher ( String...dirs ) {
 	directories = new ArrayList();
-	done = false;
+	running = false;
 	
 	try {
 	    watcher = FileSystems.getDefault().newWatchService();
@@ -62,23 +65,26 @@ public class Watcher {
      * begin watching directories
      */
     public void start () {
-	CompletableFuture.runAsync(this::run);
+	if (!running) {
+	    CompletableFuture.runAsync(this::run);
+	    running = true;
+	}
     }
     
     /**
      * stop watching directories
      */
     public void stop () {
-	this.done = true;
+	running = false;
     }
     
     /**
      * Begins watching the target directories, and passes 
-     * new file events to the rule manager.
+     * new file events to the RuleSet.
      */
     private void run () {
 	WatchKey key;
-	while (!this.done) {
+	while (this.running) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
             
@@ -95,7 +101,7 @@ public class Watcher {
 		Path abspath = dir.resolve(ev.context());
 
                 // do something with the absolute path.
-		System.out.println(abspath);
+		rules.apply(abspath);
 	    }
 	    
 	    if(!key.reset())
@@ -111,7 +117,7 @@ public class Watcher {
      * @return the directories being watched 
      */
     public ArrayList<Path> getWatched () {
-        return this.directories;
+        return directories;
     }
     
     /**
@@ -119,7 +125,7 @@ public class Watcher {
      * @param p paths to begin watching 
      */
     public void setWatched ( ArrayList<Path> p ) {
-        this.directories = p;
+        directories = p;
     }
     
     /**
@@ -127,7 +133,7 @@ public class Watcher {
      * @return the watchservice being used
      */
     public WatchService getWatcher () {
-        return this.watcher;
+        return watcher;
     }
     
     /**
@@ -135,7 +141,23 @@ public class Watcher {
      * @param w set a new watcher 
      */
     public void setWatcher ( WatchService w ) {
-        this.watcher = w;
+        watcher = w;
+    }
+    
+    /**
+     * get the current RuleSet
+     * @return the current set of rules
+     */
+    public RuleSet getRules () {
+        return rules;
+    }
+    
+    /**
+     * use a new RuleSet
+     * @param r the RuleSet to use
+     */
+    public void setRules ( RuleSet r ) {
+        rules = r;
     }
     
 }

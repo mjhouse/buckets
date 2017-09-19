@@ -19,13 +19,21 @@ import java.nio.file.Paths;
  */
 public class Move extends Action {
     private final Path outDir; 
+
+    /**
+     * construct move from string path
+     * @param to directory to move to 
+     */
+    public Move ( String to ) {
+        this.outDir = Paths.get(to).toAbsolutePath();
+    }
     
     /**
-     * 
+     * construct move from Path
      * @param to directory to move to 
      */
     public Move ( Path to ) {
-        this.outDir = to;
+        this.outDir = to.toAbsolutePath();
     }
     
     /**
@@ -36,7 +44,8 @@ public class Move extends Action {
     @Override
     public void apply ( Path src ) throws IOException {
         // build the full path to the new location (w/ file name)
-        String name = src.getName(src.getNameCount()-1).toString();
+	Path nsrc = src.toAbsolutePath();
+        String name = nsrc.getName(nsrc.getNameCount()-1).toString();
         Path out = Paths.get(this.outDir.toString(), name);
         
         // move the file
