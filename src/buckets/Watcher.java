@@ -32,6 +32,10 @@ public class Watcher {
     private ArrayList<Path> directories;
     private WatchService watcher;
     
+    /**
+     * 
+     * @param dirs vararg directories to watch
+     */
     public Watcher ( String...dirs ) {
 	directories = new ArrayList();
 	

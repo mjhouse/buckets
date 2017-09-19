@@ -5,22 +5,34 @@
  */
 package buckets.actions;
 
+// local imports
+
+// system imports
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- *
+ * moves given paths to an output directory.
  * @author mhouse
  */
 public class Move extends Action {
     private final Path outDir; 
     
+    /**
+     * 
+     * @param to directory to move to 
+     */
     public Move ( Path to ) {
         this.outDir = to;
     }
     
+    /**
+     * tries to move the file to the output directory
+     * @param src the file or directory to move
+     * @throws IOException 
+     */
     @Override
     public void apply ( Path src ) throws IOException {
         // build the full path to the new location (w/ file name)
