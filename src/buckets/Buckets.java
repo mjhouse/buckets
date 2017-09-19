@@ -21,12 +21,7 @@ public class Buckets {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-            Action a = new Move(Paths.get("/home/mhouse/Videos"));
-            a.apply(Paths.get("/home/mhouse/test.txt"));   
-        } catch (IOException e) {
-            
-        }
+
     }
     
 }
