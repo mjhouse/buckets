@@ -14,6 +14,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.nio.file.Path;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * matches against a path, and applies some action to 
  * the matched file.
@@ -21,6 +25,7 @@ import java.nio.file.Path;
  * @author mhouse
  */
 public class Rule {
+    private static Logger log = Logger.getLogger("buckets.rules.rule");
     private final Pattern pattern;
     private Action action;
     

@@ -27,6 +27,10 @@ import java.nio.file.WatchEvent;
 // async
 import java.util.concurrent.CompletableFuture;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * watches a given collection of directories and notifies
  * the rule manager when files are created.
@@ -34,6 +38,7 @@ import java.util.concurrent.CompletableFuture;
  * @author mhouse
  */
 public class Watcher {
+    private static Logger log = Logger.getLogger("buckets.watcher");
     private ArrayList<Path> directories;
     private RuleSet rules;
     private WatchService watcher;
@@ -67,6 +72,7 @@ public class Watcher {
     public void start () {
 	if (!running) {
 	    CompletableFuture.runAsync(this::run);
+	    log.config("watching directories");
 	    running = true;
 	}
     }
@@ -75,6 +81,7 @@ public class Watcher {
      * stop watching directories
      */
     public void stop () {
+	log.config("signalling stop");
 	running = false;
     }
     
@@ -84,12 +91,14 @@ public class Watcher {
      */
     private void run () {
 	WatchKey key;
-	while (this.running) {
+	while (running) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
             
             // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
+		log.config("event received");
+		
 		// get the environment from the event
 		WatchEvent<Path> ev = (WatchEvent<Path>)event;
 
@@ -104,8 +113,10 @@ public class Watcher {
 		rules.apply(abspath);
 	    }
 	    
-	    if(!key.reset())
-		break;
+	    if(!key.reset()) {
+		log.config("watchkey is bad");
+		this.stop();
+	    }
 	}
     }
     

@@ -5,19 +5,22 @@
  */
 package buckets.actions;
 
-// local imports
-
 // system imports
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * moves given paths to an output directory.
  * @author mhouse
  */
 public class Move extends Action {
+    private static Logger log = Logger.getLogger("buckets.actions.move");
     private final Path outDir; 
 
     /**

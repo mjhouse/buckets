@@ -12,11 +12,16 @@ import java.nio.file.Path;
 import java.io.IOException;
 import java.util.Arrays;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mhouse
  */
 public class RuleSet implements Iterable<Rule> {
+    private static Logger log = Logger.getLogger("buckets.rules.ruleset");
     private ArrayList<Rule> rules;
     
     /**
