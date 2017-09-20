@@ -52,6 +52,7 @@ public class Watcher {
 	directories = new ArrayList();
 	running = false;
 	
+        
 	try {
 	    watcher = FileSystems.getDefault().newWatchService();
 	    
