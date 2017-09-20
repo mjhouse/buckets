@@ -78,4 +78,9 @@ public class Rule {
     public void setAction ( Action a ) {
 	action = a;
     }
+    
+    @Override
+    public String toString() {
+        return "Rule{" + "pattern=" + pattern + ", action=" + action.toString() + '}';
+    }
 }

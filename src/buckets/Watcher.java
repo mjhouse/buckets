@@ -72,7 +72,7 @@ public class Watcher {
     public void start () {
 	if (!running) {
 	    CompletableFuture.runAsync(this::run);
-	    log.config("watching directories");
+	    log.info("watching directories");
 	    running = true;
 	}
     }
@@ -81,7 +81,7 @@ public class Watcher {
      * stop watching directories
      */
     public void stop () {
-	log.config("signalling stop");
+	log.info("stopping");
 	running = false;
     }
     
@@ -97,7 +97,7 @@ public class Watcher {
             
             // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
-		log.config("event received");
+		log.info("event received");
 		
 		// get the environment from the event
 		WatchEvent<Path> ev = (WatchEvent<Path>)event;
@@ -114,7 +114,7 @@ public class Watcher {
 	    }
 	    
 	    if(!key.reset()) {
-		log.config("watchkey is bad");
+		log.info("watchkey is bad");
 		this.stop();
 	    }
 	}

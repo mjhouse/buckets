@@ -54,4 +54,10 @@ public class Move extends Action {
         // move the file
         Files.move(src,out);
     }
+
+    @Override
+    public String toString() {
+        return "Move{" + "outDir=" + outDir + '}';
+    }
+
 }
