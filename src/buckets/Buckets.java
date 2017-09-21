@@ -16,9 +16,15 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.lang.Thread;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 // logging imports
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.FileHandler;
 
 /**
  *
@@ -32,23 +38,25 @@ public class Buckets {
      */
     public static void main(String[] args) {
 	log.setLevel(Level.INFO);
-	log.config("starting main");
-	
-	RuleSet rules = new RuleSet(
-		new Rule( ".*txt$", new Move("/home/mhouse/Downloads/test/outside") )
-	);
-	
-	Watcher w = new Watcher("/home/mhouse/Downloads/test/inside");
-	w.setRules(rules);
-	w.start();
-	
-	try {
-	    Thread.sleep(1000*60);
-	} catch (InterruptedException e) {
-	    System.out.println(e);
-	}
-	
-	w.stop();
+	log.info("starting Buckets");
+        
+        /*
+        // add a file handler for the log. Right now, the path is manual, but when we 
+        // have persistant configuration, we'll have an option for this.
+        try { log.addHandler(new FileHandler("/home/mhouse/Projects/java/buckets/data/logs/buckets.log"));}
+        catch (IOException e) { log.warning(e.toString()); }
+	*/
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby:buckets;create=true");
+            conn.setAutoCommit(false);
+            
+            Statement s = conn.createStatement();
+            s.execute("create table location(num int, addr varchar(40))");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
     }
     
 }

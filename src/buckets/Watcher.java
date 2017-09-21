@@ -72,9 +72,9 @@ public class Watcher {
      */
     public void start () {
 	if (!running) {
+            running = true;
+            log.info("watching directories");
 	    CompletableFuture.runAsync(this::run);
-	    log.info("watching directories");
-	    running = true;
 	}
     }
     
@@ -82,8 +82,8 @@ public class Watcher {
      * stop watching directories
      */
     public void stop () {
-	log.info("stopping");
 	running = false;
+        log.info("stopping");
     }
     
     /**
@@ -95,7 +95,7 @@ public class Watcher {
 	while (running) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
-            
+
             // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
 		log.info("event received");

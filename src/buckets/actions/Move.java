@@ -21,14 +21,14 @@ import java.util.logging.Logger;
  */
 public class Move extends Action {
     private static Logger log = Logger.getLogger("buckets.actions.move");
-    private final Path outDir; 
+    private final Path output; 
 
     /**
      * construct move from string path
      * @param to directory to move to 
      */
     public Move ( String to ) {
-        this.outDir = Paths.get(to).toAbsolutePath();
+        this.output = Paths.get(to).toAbsolutePath();
     }
     
     /**
@@ -36,7 +36,7 @@ public class Move extends Action {
      * @param to directory to move to 
      */
     public Move ( Path to ) {
-        this.outDir = to.toAbsolutePath();
+        this.output = to.toAbsolutePath();
     }
     
     /**
@@ -49,15 +49,9 @@ public class Move extends Action {
         // build the full path to the new location (w/ file name)
 	Path nsrc = src.toAbsolutePath();
         String name = nsrc.getName(nsrc.getNameCount()-1).toString();
-        Path out = Paths.get(this.outDir.toString(), name);
+        Path out = Paths.get(this.output.toString(), name);
         
         // move the file
         Files.move(src,out);
     }
-
-    @Override
-    public String toString() {
-        return "Move{" + "outDir=" + outDir + '}';
-    }
-
 }
