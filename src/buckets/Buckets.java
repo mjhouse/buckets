@@ -5,27 +5,58 @@
  */
 package buckets;
 
+import buckets.rules.RuleSet;
+import buckets.rules.Rule;
+import buckets.actions.Move;
+import buckets.actions.Action;
+import buckets.actions.Move;
+
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.lang.Thread;
 
-import buckets.actions.Action;
-import buckets.actions.Move;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
 
 /**
  *
  * @author blankie
  */
 public class Buckets {
+    private static Logger log = Logger.getLogger("buckets");
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("This is the project");  //This is a comment
-        GUI frame = new GUI();
-        frame.setVisible(true);
+	log.setLevel(Level.INFO);
+	log.info("starting Buckets");
+        
+        /*
+        // add a file handler for the log. Right now, the path is manual, but when we 
+        // have persistant configuration, we'll have an option for this.
+        try { log.addHandler(new FileHandler("/home/mhouse/Projects/java/buckets/data/logs/buckets.log"));}
+        catch (IOException e) { log.warning(e.toString()); }
+	*/
+        
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:derby:buckets;create=true");
+            conn.setAutoCommit(false);
+            
+            Statement s = conn.createStatement();
+            s.execute("create table location(num int, addr varchar(40))");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
     }
     
 }

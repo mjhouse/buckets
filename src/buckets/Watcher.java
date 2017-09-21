@@ -5,6 +5,8 @@
  */
 package buckets;
 
+import buckets.rules.RuleSet;
+
 // data structures
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,6 +27,10 @@ import java.nio.file.WatchEvent;
 // async
 import java.util.concurrent.CompletableFuture;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * watches a given collection of directories and notifies
  * the rule manager when files are created.
@@ -32,18 +38,21 @@ import java.util.concurrent.CompletableFuture;
  * @author mhouse
  */
 public class Watcher {
+    private static Logger log = Logger.getLogger("buckets.watcher");
     private ArrayList<Path> directories;
+    private RuleSet rules;
     private WatchService watcher;
-    private Boolean done;
+    private Boolean running;
     
     /**
      * 
-     * @param dirs vararg directories to watch
+     * @param dirs directories to watch
      */
     public Watcher ( String...dirs ) {
 	directories = new ArrayList();
-	done = false;
+	running = false;
 	
+        
 	try {
 	    watcher = FileSystems.getDefault().newWatchService();
 	    
@@ -62,28 +71,35 @@ public class Watcher {
      * begin watching directories
      */
     public void start () {
-	CompletableFuture.runAsync(this::run);
+	if (!running) {
+            running = true;
+            log.info("watching directories");
+	    CompletableFuture.runAsync(this::run);
+	}
     }
     
     /**
      * stop watching directories
      */
     public void stop () {
-	this.done = true;
+	running = false;
+        log.info("stopping");
     }
     
     /**
      * Begins watching the target directories, and passes 
-     * new file events to the rule manager.
+     * new file events to the RuleSet.
      */
     private void run () {
 	WatchKey key;
-	while (!this.done) {
+	while (running) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
-            
+
             // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
+		log.info("event received");
+		
 		// get the environment from the event
 		WatchEvent<Path> ev = (WatchEvent<Path>)event;
 
@@ -95,11 +111,13 @@ public class Watcher {
 		Path abspath = dir.resolve(ev.context());
 
                 // do something with the absolute path.
-		System.out.println(abspath);
+		rules.apply(abspath);
 	    }
 	    
-	    if(!key.reset())
-		break;
+	    if(!key.reset()) {
+		log.info("watchkey is bad");
+		this.stop();
+	    }
 	}
     }
     
@@ -111,7 +129,7 @@ public class Watcher {
      * @return the directories being watched 
      */
     public ArrayList<Path> getWatched () {
-        return this.directories;
+        return directories;
     }
     
     /**
@@ -119,7 +137,7 @@ public class Watcher {
      * @param p paths to begin watching 
      */
     public void setWatched ( ArrayList<Path> p ) {
-        this.directories = p;
+        directories = p;
     }
     
     /**
@@ -127,7 +145,7 @@ public class Watcher {
      * @return the watchservice being used
      */
     public WatchService getWatcher () {
-        return this.watcher;
+        return watcher;
     }
     
     /**
@@ -135,7 +153,23 @@ public class Watcher {
      * @param w set a new watcher 
      */
     public void setWatcher ( WatchService w ) {
-        this.watcher = w;
+        watcher = w;
+    }
+    
+    /**
+     * get the current RuleSet
+     * @return the current set of rules
+     */
+    public RuleSet getRules () {
+        return rules;
+    }
+    
+    /**
+     * use a new RuleSet
+     * @param r the RuleSet to use
+     */
+    public void setRules ( RuleSet r ) {
+        rules = r;
     }
     
 }

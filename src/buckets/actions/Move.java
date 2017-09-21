@@ -5,27 +5,38 @@
  */
 package buckets.actions;
 
-// local imports
-
 // system imports
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+// logging imports
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * moves given paths to an output directory.
  * @author mhouse
  */
 public class Move extends Action {
-    private final Path outDir; 
+    private static Logger log = Logger.getLogger("buckets.actions.move");
+    private final Path output; 
+
+    /**
+     * construct move from string path
+     * @param to directory to move to 
+     */
+    public Move ( String to ) {
+        this.output = Paths.get(to).toAbsolutePath();
+    }
     
     /**
-     * 
+     * construct move from Path
      * @param to directory to move to 
      */
     public Move ( Path to ) {
-        this.outDir = to;
+        this.output = to.toAbsolutePath();
     }
     
     /**
@@ -36,8 +47,9 @@ public class Move extends Action {
     @Override
     public void apply ( Path src ) throws IOException {
         // build the full path to the new location (w/ file name)
-        String name = src.getName(src.getNameCount()-1).toString();
-        Path out = Paths.get(this.outDir.toString(), name);
+	Path nsrc = src.toAbsolutePath();
+        String name = nsrc.getName(nsrc.getNameCount()-1).toString();
+        Path out = Paths.get(this.output.toString(), name);
         
         // move the file
         Files.move(src,out);
