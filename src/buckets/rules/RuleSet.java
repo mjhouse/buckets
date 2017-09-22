@@ -80,9 +80,12 @@ public class RuleSet implements Iterable<Rule> {
     public void apply ( Path p ) {
 	for ( Rule r : this.rules ) {
 	    try {
-		if (r.apply(p)) return;
+		if (r.apply(p)) {
+                    log.info(String.format("found rule: \"%s\"", r.getPattern()));
+                    return;
+                }
 	    } catch (IOException e) {
-		System.out.println(e);
+		log.warning(e.toString());
 	    }
 	}
     }

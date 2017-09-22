@@ -52,6 +52,7 @@ public class Watcher {
 	directories = new ArrayList();
 	running = false;
 	
+        
 	try {
 	    watcher = FileSystems.getDefault().newWatchService();
 	    
@@ -71,9 +72,9 @@ public class Watcher {
      */
     public void start () {
 	if (!running) {
+            running = true;
+            log.info("watching directories");
 	    CompletableFuture.runAsync(this::run);
-	    log.config("watching directories");
-	    running = true;
 	}
     }
     
@@ -81,8 +82,8 @@ public class Watcher {
      * stop watching directories
      */
     public void stop () {
-	log.config("signalling stop");
 	running = false;
+        log.info("stopping");
     }
     
     /**
@@ -94,10 +95,10 @@ public class Watcher {
 	while (running) {
             // poll for events from watcher
 	    if ((key = watcher.poll()) == null) continue;
-            
+
             // if an event is found, process it
 	    for (WatchEvent<?> event : key.pollEvents()) {
-		log.config("event received");
+		log.info("event received");
 		
 		// get the environment from the event
 		WatchEvent<Path> ev = (WatchEvent<Path>)event;
@@ -114,7 +115,7 @@ public class Watcher {
 	    }
 	    
 	    if(!key.reset()) {
-		log.config("watchkey is bad");
+		log.info("watchkey is bad");
 		this.stop();
 	    }
 	}

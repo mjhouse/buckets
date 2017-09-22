@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/mhouse/Projects/school/CS321/buckets/src/buckets/Buckets.java</file>
-            <file>file:/home/mhouse/Projects/school/CS321/buckets/src/buckets/rules/RuleSet.java</file>
-            <file>file:/home/mhouse/Projects/school/CS321/buckets/src/buckets/rules/Rule.java</file>
-            <file>file:/home/mhouse/Projects/school/CS321/buckets/src/buckets/Watcher.java</file>
-            <file>file:/home/mhouse/Projects/school/CS321/buckets/src/buckets/actions/Move.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/actions/Move.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/rules/RuleSet.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/actions/Action.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/rules/Rule.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/Watcher.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/Buckets.java</file>
         </group>
     </open-files>
 </project-private>

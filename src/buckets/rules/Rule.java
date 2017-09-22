@@ -59,8 +59,18 @@ public class Rule {
     public Boolean apply ( Path p ) throws IOException {
         Matcher matcher = pattern.matcher(p.toString());
 	Boolean match = matcher.matches(); 
-        if (match && action!=null) action.apply( p );
+        if (match && action!=null) {
+            action.apply( p );
+        }
 	return match;
+    }
+  
+    /**
+     * get the pattern for this rule
+     * @return the compiled regex pattern
+     */
+    public Pattern getPattern () {
+	return pattern;
     }
     
     /**
