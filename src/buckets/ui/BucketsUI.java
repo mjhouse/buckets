@@ -37,12 +37,15 @@ public class BucketsUI extends javax.swing.JFrame {
         watchInputLabel = new javax.swing.JLabel();
         watchDirectoryPicker = new javax.swing.JButton();
         watchDirectoryList = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         watchAdd = new javax.swing.JButton();
         watchRemove = new javax.swing.JButton();
         rulesTab = new javax.swing.JPanel();
+        rulesInputLabel = new javax.swing.JLabel();
+        rulesRuleInput = new javax.swing.JTextField();
+        rulesAdd = new javax.swing.JButton();
+        rulesRemove = new javax.swing.JButton();
+        rulesRuleList = new javax.swing.JScrollPane();
+        rulesRuleInput1 = new javax.swing.JTextField();
 
         filePicker.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
@@ -64,41 +67,6 @@ public class BucketsUI extends javax.swing.JFrame {
         });
 
         watchDirectoryList.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jLabel1.setText("none");
-
-        jButton1.setForeground(new java.awt.Color(211, 47, 47));
-        jButton1.setText("Remove");
-        jButton1.setToolTipText("remove directory");
-        jButton1.setAlignmentX(0.5F);
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setMinimumSize(new java.awt.Dimension(11, 17));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(190, Short.MAX_VALUE))
-        );
-
-        watchDirectoryList.setViewportView(jPanel1);
 
         watchAdd.setText("Add");
         watchAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +100,7 @@ public class BucketsUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(watchRemove)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(watchDirectoryList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(watchDirectoryList, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         watchTabLayout.setVerticalGroup(
@@ -152,15 +120,70 @@ public class BucketsUI extends javax.swing.JFrame {
 
         Tabs.addTab("Watch", watchTab);
 
+        rulesInputLabel.setText("Add Rule");
+
+        rulesRuleInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesRuleInputActionPerformed(evt);
+            }
+        });
+
+        rulesAdd.setText("Add");
+        rulesAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesAddActionPerformed(evt);
+            }
+        });
+
+        rulesRemove.setText("Remove");
+        rulesRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesRemoveActionPerformed(evt);
+            }
+        });
+
+        rulesRuleList.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        rulesRuleInput1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulesRuleInput1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rulesTabLayout = new javax.swing.GroupLayout(rulesTab);
         rulesTab.setLayout(rulesTabLayout);
         rulesTabLayout.setHorizontalGroup(
             rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGroup(rulesTabLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(rulesInputLabel)
+                .addGap(18, 18, 18)
+                .addComponent(rulesRuleInput, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rulesRuleInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rulesAdd)
+                .addGap(18, 18, 18)
+                .addComponent(rulesRemove)
+                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(rulesTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rulesRuleList)
+                .addContainerGap())
         );
         rulesTabLayout.setVerticalGroup(
             rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGroup(rulesTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rulesRuleInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rulesRuleInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rulesInputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rulesAdd)
+                    .addComponent(rulesRemove))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rulesRuleList, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         Tabs.addTab("Rules", rulesTab);
@@ -207,6 +230,22 @@ public class BucketsUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_watchAddActionPerformed
 
+    private void rulesRuleInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesRuleInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rulesRuleInputActionPerformed
+
+    private void rulesAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rulesAddActionPerformed
+
+    private void rulesRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rulesRemoveActionPerformed
+
+    private void rulesRuleInput1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesRuleInput1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rulesRuleInput1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,9 +284,12 @@ public class BucketsUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JFileChooser filePicker;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton rulesAdd;
+    private javax.swing.JLabel rulesInputLabel;
+    private javax.swing.JButton rulesRemove;
+    private javax.swing.JTextField rulesRuleInput;
+    private javax.swing.JTextField rulesRuleInput1;
+    private javax.swing.JScrollPane rulesRuleList;
     private javax.swing.JPanel rulesTab;
     private javax.swing.JButton watchAdd;
     private javax.swing.JTextField watchDirectoryInput;
