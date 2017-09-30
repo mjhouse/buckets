@@ -75,7 +75,6 @@ public class Watcher implements Subscriber {
             if (e instanceof AddDirectory) {
                 AddDirectory a = (AddDirectory)e;
                 this.addWatched(a.getPath());
-                System.out.println("ADDED: " + a.getPath());
                 this.broadcaster.broadcast(new DirectoryAdded());
             }
 	}

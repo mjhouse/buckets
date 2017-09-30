@@ -13,7 +13,10 @@ import buckets.data.Broadcaster;
 import buckets.data.Subscriber;
 
 import javax.swing.JFileChooser;
+
 import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,14 +31,16 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
     public BucketsUI(Broadcaster b) {
 	// Init and add channels to the broadcaster
 	broadcaster = b;
-        
         initComponents();
     }
     
     @Override
-    public void notify ( BucketsEvent e ) {
-        if (e instanceof DirectoryAdded) {
-            System.out.println("SUCCESS!");
+    public void notify ( BucketsEvent e ) {}
+    
+    public void setDirectories( ArrayList<Path> paths ){
+        watchDirectoryList.removeAll();
+        for (Path p : paths) {
+            watchDirectoryList.add(new javax.swing.JLabel(p.toString()));
         }
     }
 

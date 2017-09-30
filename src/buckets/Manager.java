@@ -9,9 +9,12 @@ import buckets.data.Subscriber;
 import buckets.data.Broadcaster;
 
 import buckets.data.events.BucketsEvent;
+import buckets.data.events.DirectoryAdded;
 import buckets.ui.BucketsUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -27,14 +30,18 @@ public class Manager implements Subscriber {
             
 		watcher = new Watcher(broadcaster);
 		ui = new BucketsUI(broadcaster);
-                
-                broadcaster.subscribe( watcher, ui );
 	}
 	
 	public void run () {
+                broadcaster.subscribe( watcher, ui, this );
 		EventQueue.invokeLater(() -> { this.ui.setVisible(true); });
 	}
 	
 	@Override
-	public void notify ( BucketsEvent e ) {}
+	public void notify ( BucketsEvent e ) {
+            if (e instanceof DirectoryAdded) {
+                ArrayList directories = watcher.getWatched();
+                ui.setDirectories(directories);
+            }
+        }
 }
