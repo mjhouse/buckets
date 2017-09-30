@@ -6,13 +6,12 @@
 package buckets;
 
 import buckets.rules.RuleSet;
+import buckets.data.Subscriber;
 
 // data structures
 import java.util.ArrayList;
-import java.util.Map;
 
 // file/path objects
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +27,6 @@ import java.nio.file.WatchEvent;
 import java.util.concurrent.CompletableFuture;
 
 // logging imports
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -37,7 +35,7 @@ import java.util.logging.Logger;
  * 
  * @author mhouse
  */
-public class Watcher {
+public class Watcher implements Subscriber<Path> {
     private static Logger log = Logger.getLogger("buckets.watcher");
     private ArrayList<Path> directories;
     private RuleSet rules;
@@ -49,40 +47,45 @@ public class Watcher {
      * @param dirs directories to watch
      */
     public Watcher ( String...dirs ) {
-	directories = new ArrayList();
-	running = false;
-	
-        
-	try {
-	    watcher = FileSystems.getDefault().newWatchService();
-	    
-	    for ( String s : dirs ) {
-		Path absp = Paths.get(s).toAbsolutePath();
-		absp.register(watcher, ENTRY_CREATE);
-		directories.add(absp);
-	    }
+		directories = new ArrayList();
+		rules = new RuleSet();
+		running = false;
 		
-	} catch (IOException e) {
-	    System.err.println(e);
-	}
+		try {
+			watcher = FileSystems.getDefault().newWatchService();
+			for ( String s : dirs ) {
+				Path absp = Paths.get(s).toAbsolutePath();
+				this.addWatched(absp);
+			}	
+		} catch (IOException e) {
+			
+		}
     }
+	
+	@Override
+	public void notify ( String name, Path p ) {
+		switch (name) {
+			case "watchAddActionPerformed":	this.addWatched(p);
+											break;
+		}
+	}
     
     /**
      * begin watching directories
      */
     public void start () {
-	if (!running) {
-            running = true;
-            log.info("watching directories");
-	    CompletableFuture.runAsync(this::run);
-	}
+		if (!running) {
+			running = true;
+			log.info("watching directories");
+			CompletableFuture.runAsync(this::run);
+		}
     }
     
     /**
      * stop watching directories
      */
     public void stop () {
-	running = false;
+		running = false;
         log.info("stopping");
     }
     
@@ -91,34 +94,34 @@ public class Watcher {
      * new file events to the RuleSet.
      */
     private void run () {
-	WatchKey key;
-	while (running) {
-            // poll for events from watcher
-	    if ((key = watcher.poll()) == null) continue;
+		WatchKey key;
+		while (running) {
+			// poll for events from watcher
+			if ((key = watcher.poll()) == null) continue;
 
-            // if an event is found, process it
-	    for (WatchEvent<?> event : key.pollEvents()) {
-		log.info("event received");
-		
-		// get the environment from the event
-		WatchEvent<Path> ev = (WatchEvent<Path>)event;
+			// if an event is found, process it
+			for (WatchEvent<?> event : key.pollEvents()) {
+			log.info("event received");
 
-                // get the directory the event occurs in
-		Path dir = (Path)key.watchable();
-                
-                // build an absolute path with the directory and 
-                // file name.
-		Path abspath = dir.resolve(ev.context());
+			// get the environment from the event
+			WatchEvent<Path> ev = (WatchEvent<Path>)event;
 
-                // do something with the absolute path.
-		rules.apply(abspath);
-	    }
-	    
-	    if(!key.reset()) {
-		log.info("watchkey is bad");
-		this.stop();
-	    }
-	}
+			// get the directory the event occurs in
+			Path dir = (Path)key.watchable();
+
+			// build an absolute path with the directory and 
+			// file name.
+			Path abspath = dir.resolve(ev.context());
+
+			// do something with the absolute path.
+			rules.apply(abspath);
+			}
+
+			if(!key.reset()) {
+			log.info("watchkey is bad");
+			this.stop();
+			}
+		}
     }
     
     /* ---------------------------------------------------------------------- */
@@ -138,6 +141,28 @@ public class Watcher {
      */
     public void setWatched ( ArrayList<Path> p ) {
         directories = p;
+    }
+	
+    /**
+     * 
+     * @param p path to begin watching
+     */
+    public void addWatched ( Path p ) {
+		try {
+			p.register(watcher, ENTRY_CREATE);
+			directories.add(p);
+			System.out.println("ADD: " + p.toString());
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+    }
+	
+    /**
+     * 
+     * @param p path to stop watching
+     */
+    public void removeWatched ( Path p ) {
+        directories.remove(p);
     }
     
     /**

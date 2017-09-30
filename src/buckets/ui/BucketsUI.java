@@ -4,20 +4,27 @@
  * and open the template in the editor.
  */
 package buckets.ui;
-
-import java.io.File;
+import buckets.data.Broadcaster;
 import javax.swing.JFileChooser;
+import java.nio.file.Paths;
 
 /**
  *
  * @author mhouse
  */
 public class BucketsUI extends javax.swing.JFrame {
-
+	public Broadcaster broadcast;
+	
     /**
      * Creates new form BucketsUI
      */
     public BucketsUI() {
+		// Init and add channels to the broadcaster
+		broadcast = new Broadcaster(
+			"watchRemoveActionPerformed",
+			"watchAddActionPerformed"
+		);
+		
         initComponents();
     }
 
@@ -54,15 +61,13 @@ public class BucketsUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        watchTab.setBorder(null);
-
         watchDirectoryInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 watchDirectoryInputActionPerformed(evt);
             }
         });
 
-        watchInputLabel.setText("Add/Remove Directory");
+        watchInputLabel.setText("Add Directory");
 
         watchDirectoryPicker.setText("...");
         watchDirectoryPicker.addActionListener(new java.awt.event.ActionListener() {
@@ -94,18 +99,17 @@ public class BucketsUI extends javax.swing.JFrame {
             .addGroup(watchTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(watchTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(watchDirectoryList)
                     .addGroup(watchTabLayout.createSequentialGroup()
                         .addComponent(watchInputLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(watchDirectoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(watchDirectoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(watchDirectoryPicker)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(watchAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(watchRemove)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(watchDirectoryList, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(watchRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         watchTabLayout.setVerticalGroup(
@@ -116,16 +120,14 @@ public class BucketsUI extends javax.swing.JFrame {
                     .addComponent(watchInputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(watchDirectoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(watchDirectoryPicker)
-                    .addComponent(watchAdd)
-                    .addComponent(watchRemove))
+                    .addComponent(watchRemove)
+                    .addComponent(watchAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(watchDirectoryList)
+                .addComponent(watchDirectoryList, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         Tabs.addTab("Watch", watchTab);
-
-        rulesTab.setBorder(null);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Rule");
@@ -176,7 +178,7 @@ public class BucketsUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         rulesTabLayout.setVerticalGroup(
@@ -243,7 +245,8 @@ public class BucketsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_watchDirectoryPickerActionPerformed
 
     private void watchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchAddActionPerformed
-        // TODO add your handling code here:
+        broadcast.broadcast("watchAddActionPerformed",evt);
+		broadcast.broadcast("watchAddActionPerformed",Paths.get(watchDirectoryInput.getText()));
     }//GEN-LAST:event_watchAddActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -258,33 +261,11 @@ public class BucketsUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+	
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BucketsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BucketsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BucketsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BucketsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

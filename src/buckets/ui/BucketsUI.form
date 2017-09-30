@@ -56,11 +56,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="watchTab">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Watch">
@@ -75,19 +70,18 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="watchDirectoryList" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="watchInputLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="watchDirectoryInput" min="-2" pref="320" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="watchDirectoryInput" min="-2" pref="386" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="watchDirectoryPicker" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="watchAdd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="watchRemove" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="watchRemove" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="watchDirectoryList" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -101,11 +95,11 @@
                           <Component id="watchInputLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="watchDirectoryInput" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="watchDirectoryPicker" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="watchAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="watchRemove" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="watchAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="watchDirectoryList" max="32767" attributes="0"/>
+                      <Component id="watchDirectoryList" pref="214" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -119,7 +113,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="watchInputLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add/Remove Directory"/>
+                <Property name="text" type="java.lang.String" value="Add Directory"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="watchDirectoryPicker">
@@ -156,11 +150,6 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="rulesTab">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Rules">
@@ -193,7 +182,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel4" pref="164" max="32767" attributes="0"/>
+                              <Component id="jLabel4" pref="165" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
