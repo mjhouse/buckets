@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -38,10 +39,9 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
     public void notify ( BucketsEvent e ) {}
     
     public void setDirectories( ArrayList<Path> paths ){
-        watchDirectoryList.removeAll();
-        for (Path p : paths) {
-            watchDirectoryList.add(new javax.swing.JLabel(p.toString()));
-        }
+        watchList.setListData(paths.stream()
+            .map(p -> p.toString())
+            .toArray(String[]::new));
     }
 
     /**
@@ -60,6 +60,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
         watchInputLabel = new javax.swing.JLabel();
         watchDirectoryPicker = new javax.swing.JButton();
         watchDirectoryList = new javax.swing.JScrollPane();
+        watchList = new javax.swing.JList<>();
         watchAdd = new javax.swing.JButton();
         watchRemove = new javax.swing.JButton();
         rulesTab = new javax.swing.JPanel();
@@ -93,6 +94,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
         });
 
         watchDirectoryList.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        watchDirectoryList.setViewportView(watchList);
 
         watchAdd.setText("Add");
         watchAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -308,6 +311,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
     private javax.swing.JScrollPane watchDirectoryList;
     private javax.swing.JButton watchDirectoryPicker;
     private javax.swing.JLabel watchInputLabel;
+    private javax.swing.JList<String> watchList;
     private javax.swing.JButton watchRemove;
     private javax.swing.JPanel watchTab;
     // End of variables declaration//GEN-END:variables
