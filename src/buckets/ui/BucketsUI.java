@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package buckets.ui;
+
+import buckets.data.events.BucketsEvent;
+import buckets.data.events.AddDirectory;
+import buckets.data.events.DirectoryAdded;
+
 import buckets.data.Broadcaster;
+import buckets.data.Subscriber;
+
 import javax.swing.JFileChooser;
 import java.nio.file.Paths;
 
@@ -12,20 +19,24 @@ import java.nio.file.Paths;
  *
  * @author mhouse
  */
-public class BucketsUI extends javax.swing.JFrame {
-	public Broadcaster broadcast;
+public class BucketsUI extends javax.swing.JFrame implements Subscriber {
+	private final Broadcaster broadcaster;
 	
     /**
      * Creates new form BucketsUI
      */
-    public BucketsUI() {
-		// Init and add channels to the broadcaster
-		broadcast = new Broadcaster(
-			"watchRemoveActionPerformed",
-			"watchAddActionPerformed"
-		);
-		
+    public BucketsUI(Broadcaster b) {
+	// Init and add channels to the broadcaster
+	broadcaster = b;
+        
         initComponents();
+    }
+    
+    @Override
+    public void notify ( BucketsEvent e ) {
+        if (e instanceof DirectoryAdded) {
+            System.out.println("SUCCESS!");
+        }
     }
 
     /**
@@ -245,8 +256,8 @@ public class BucketsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_watchDirectoryPickerActionPerformed
 
     private void watchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchAddActionPerformed
-        broadcast.broadcast("watchAddActionPerformed",evt);
-		broadcast.broadcast("watchAddActionPerformed",Paths.get(watchDirectoryInput.getText()));
+        AddDirectory e = new AddDirectory(watchDirectoryInput.getText());
+        broadcaster.broadcast(e);
     }//GEN-LAST:event_watchAddActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -269,7 +280,7 @@ public class BucketsUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BucketsUI().setVisible(true);
+                new BucketsUI(null).setVisible(true);
             }
         });
     }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buckets.data;
-import buckets.data.events.BucketsEvent;
+package buckets.data.events;
+
 /**
  *
  * @author mhouse
  */
-public interface Subscriber {
-	public void notify( BucketsEvent e );
+public class DirectoryAdded extends BucketsEvent {
+    
 }

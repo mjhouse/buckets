@@ -6,6 +6,9 @@
 package buckets;
 
 import buckets.data.Subscriber;
+import buckets.data.Broadcaster;
+
+import buckets.data.events.BucketsEvent;
 import buckets.ui.BucketsUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -14,24 +17,24 @@ import java.awt.event.ActionEvent;
  *
  * @author mhouse
  */
-public class Manager implements Subscriber<ActionEvent> {
+public class Manager implements Subscriber {
 	private BucketsUI ui;
 	private Watcher watcher;
+        public Broadcaster broadcaster;
 	
 	public Manager () {
-		watcher = new Watcher();
-		ui = new BucketsUI();
-		
-		ui.broadcast.subscribe("watchAddActionPerformed",watcher);
+                broadcaster = new Broadcaster();
+            
+		watcher = new Watcher(broadcaster);
+		ui = new BucketsUI(broadcaster);
+                
+                broadcaster.subscribe( watcher, ui );
 	}
 	
 	public void run () {
-		ui.broadcast.subscribe("watchAddActionPerformed",this);
 		EventQueue.invokeLater(() -> { this.ui.setVisible(true); });
 	}
 	
 	@Override
-	public void notify ( String name, ActionEvent e ) {
-		System.out.println(name);
-	}
+	public void notify ( BucketsEvent e ) {}
 }

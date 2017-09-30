@@ -4,44 +4,42 @@
  * and open the template in the editor.
  */
 package buckets.data;
+import buckets.data.events.BucketsEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
  * @author mhouse
  */
 public class Broadcaster {
-	private HashMap<String,ArrayList<Subscriber>> channels = new HashMap();
+	private ArrayList<Subscriber> subscribers = new ArrayList();
 	
-	public Broadcaster (String... chs) {
-		for ( String ch : chs ) {
-			channels.put(ch,new ArrayList());
-		}
-	}
+	public Broadcaster () {}
 	
 	/**
-	 * broadcast an object to all subscribers who are 
-	 * capable of receiving it.
-	 * @param ch the channel name
+	 * broadcast an event to all subscribers.
 	 * @param e the object
 	 */
-	public <T> void broadcast ( String ch, T e) {
-		ArrayList<Subscriber> subscribers = channels.get(ch);
+	public void broadcast (BucketsEvent e) {
 		if (subscribers != null) {
-			for (Subscriber s : subscribers) {
-				try {
-					s.notify(ch,e);
-				} catch (ClassCastException c) {}
-			}
+                    for (Subscriber s : subscribers) {
+                        s.notify(e);
+                    }
 		}
 	}
 	
-	public void subscribe ( String channel, Subscriber subs ) {
-		ArrayList<Subscriber> subscribers = channels.get(channel);
+	public void subscribe ( Subscriber... subs ) {
+            for (Subscriber s : subs) {
+                if (subscribers != null) {
+                    subscribers.add(s);
+                }   
+            }
+	}
+        
+	public void unsubscribe ( Subscriber sub ) {
 		if (subscribers != null) {
-			subscribers.add(subs);
+			subscribers.remove(sub);
 		}
 	}
 }

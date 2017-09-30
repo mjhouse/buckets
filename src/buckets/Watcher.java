@@ -5,6 +5,11 @@
  */
 package buckets;
 
+import buckets.data.events.BucketsEvent;
+import buckets.data.events.AddDirectory;
+import buckets.data.events.DirectoryAdded;
+import buckets.data.Broadcaster;
+
 import buckets.rules.RuleSet;
 import buckets.data.Subscriber;
 
@@ -35,8 +40,10 @@ import java.util.logging.Logger;
  * 
  * @author mhouse
  */
-public class Watcher implements Subscriber<Path> {
+public class Watcher implements Subscriber {
     private static Logger log = Logger.getLogger("buckets.watcher");
+    
+    private final Broadcaster broadcaster;
     private ArrayList<Path> directories;
     private RuleSet rules;
     private WatchService watcher;
@@ -46,8 +53,9 @@ public class Watcher implements Subscriber<Path> {
      * 
      * @param dirs directories to watch
      */
-    public Watcher ( String...dirs ) {
-		directories = new ArrayList();
+    public Watcher ( Broadcaster b, String...dirs ) {
+		broadcaster = b;
+                directories = new ArrayList();
 		rules = new RuleSet();
 		running = false;
 		
@@ -63,29 +71,31 @@ public class Watcher implements Subscriber<Path> {
     }
 	
 	@Override
-	public void notify ( String name, Path p ) {
-		switch (name) {
-			case "watchAddActionPerformed":	this.addWatched(p);
-											break;
-		}
+	public void notify ( BucketsEvent e ) {
+            if (e instanceof AddDirectory) {
+                AddDirectory a = (AddDirectory)e;
+                this.addWatched(a.getPath());
+                System.out.println("ADDED: " + a.getPath());
+                this.broadcaster.broadcast(new DirectoryAdded());
+            }
 	}
     
     /**
      * begin watching directories
      */
     public void start () {
-		if (!running) {
-			running = true;
-			log.info("watching directories");
-			CompletableFuture.runAsync(this::run);
-		}
+	if (!running) {
+            running = true;
+            log.info("watching directories");
+            CompletableFuture.runAsync(this::run);
+	}
     }
     
     /**
      * stop watching directories
      */
     public void stop () {
-		running = false;
+	running = false;
         log.info("stopping");
     }
     
@@ -96,31 +106,34 @@ public class Watcher implements Subscriber<Path> {
     private void run () {
 		WatchKey key;
 		while (running) {
-			// poll for events from watcher
-			if ((key = watcher.poll()) == null) continue;
+                    // poll for events from watcher
+                    if ((key = watcher.poll()) == null) continue;
 
-			// if an event is found, process it
-			for (WatchEvent<?> event : key.pollEvents()) {
-			log.info("event received");
+                    // if an event is found, process it
+                    for (WatchEvent<?> event : key.pollEvents()) {
+                        log.info("event received");
+                    
+                        // get the environment from the event
+                        WatchEvent<Path> ev = (WatchEvent<Path>)event;
 
-			// get the environment from the event
-			WatchEvent<Path> ev = (WatchEvent<Path>)event;
+                        // get the directory the event occurs in
+                        Path dir = (Path)key.watchable();
+                        if (directories.contains(dir)) {
+                            // build an absolute path with the directory and 
+                            // file name.
+                            Path abspath = dir.resolve(ev.context());
 
-			// get the directory the event occurs in
-			Path dir = (Path)key.watchable();
+                            // do something with the absolute path.
+                            rules.apply(abspath);
+                        } else {
+                            key.cancel();
+                        }
+                    }
 
-			// build an absolute path with the directory and 
-			// file name.
-			Path abspath = dir.resolve(ev.context());
-
-			// do something with the absolute path.
-			rules.apply(abspath);
-			}
-
-			if(!key.reset()) {
-			log.info("watchkey is bad");
-			this.stop();
-			}
+                    if(!key.reset()) {
+                        log.info("watchkey is bad");
+                        this.stop();
+                    }
 		}
     }
     
@@ -148,13 +161,12 @@ public class Watcher implements Subscriber<Path> {
      * @param p path to begin watching
      */
     public void addWatched ( Path p ) {
-		try {
-			p.register(watcher, ENTRY_CREATE);
-			directories.add(p);
-			System.out.println("ADD: " + p.toString());
-		} catch (IOException e) {
-			System.err.println(e);
-		}
+	try {
+            p.register(watcher, ENTRY_CREATE);
+            directories.add(p);
+	} catch (IOException e) {
+            System.err.println(e);
+	}
     }
 	
     /**
