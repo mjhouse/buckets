@@ -54,6 +54,8 @@ public class BucketsUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        watchTab.setBorder(null);
+
         watchDirectoryInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 watchDirectoryInputActionPerformed(evt);
@@ -122,6 +124,8 @@ public class BucketsUI extends javax.swing.JFrame {
         );
 
         Tabs.addTab("Watch", watchTab);
+
+        rulesTab.setBorder(null);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Rule");
