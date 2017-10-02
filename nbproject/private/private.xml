@@ -4,8 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/mhouse/Projects/java/buckets/src/buckets/actions/Move.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/rules/RuleSet.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/events/RemoveDirectory.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/Manager.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/rules/Rule.java</file>
             <file>file:/home/mhouse/Projects/java/buckets/src/buckets/Buckets.java</file>
             <file>file:/home/mhouse/Projects/java/buckets/src/buckets/ui/BucketsUI.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/events/AddDirectory.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/Subscriber.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/events/BucketsEvent.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/events/DirectoryAdded.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/Watcher.java</file>
+            <file>file:/home/mhouse/Projects/java/buckets/src/buckets/data/Broadcaster.java</file>
         </group>
     </open-files>
 </project-private>
