@@ -54,4 +54,17 @@ public class Move extends Action {
         // move the file
         Files.move(src,out);
     }
+	
+	public Path getPath(){
+		return output;
+	}
+	
+	public Boolean isEqual( Action a ){
+		if(a instanceof Move){
+			Move b = (Move)a;
+			Boolean paths = output.equals(b.getPath());
+			return paths;
+		}
+		return false;
+	}
 }

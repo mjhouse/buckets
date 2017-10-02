@@ -49,7 +49,9 @@ public class Rule {
     }
     
     public Boolean isEqual ( Rule r ) {
-        return false;
+		Boolean patterns = pattern.pattern().equals( r.getPattern().pattern() );
+		Boolean actions = action.isEqual(r.getAction());
+        return patterns && actions;
     }
     
     /**

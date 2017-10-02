@@ -25,8 +25,9 @@ public class Buckets {
 	log.setLevel(Level.INFO);
 	log.info("starting Buckets");
         
-        //Rule rule = new Rule( "*\.txt", new Move() );
-        
+    Rule rule0 = new Rule( ".*?\\.txt", new Move("/home/mhouse/Downloads") );
+	Rule rule1 = new Rule( ".*?\\.txt", new Move("/home/mhouse/Downloads") );
+    System.out.println(rule0.isEqual(rule1));
         //Manager manager = new Manager();
 	//manager.run();
         
