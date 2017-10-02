@@ -7,9 +7,17 @@ package buckets;
 
 import buckets.data.events.BucketsEvent;
 import buckets.data.events.AddDirectory;
+import buckets.data.events.RemoveDirectory;
 import buckets.data.events.DirectoryAdded;
+import buckets.data.events.DirectoryRemoved;
+import buckets.data.events.OnLoad;
+import buckets.data.events.AddRule;
+import buckets.data.events.RemoveRule;
+
 import buckets.data.Broadcaster;
 
+import buckets.actions.Move;
+import buckets.rules.Rule;
 import buckets.rules.RuleSet;
 import buckets.data.Subscriber;
 
@@ -68,16 +76,33 @@ public class Watcher implements Subscriber {
 		} catch (IOException e) {
 			
 		}
+                
+                this.broadcaster.broadcast(new OnLoad());
     }
 	
 	@Override
 	public void notify ( BucketsEvent e ) {
             if (e instanceof AddDirectory) {
                 AddDirectory a = (AddDirectory)e;
-                this.addWatched(a.getPath());
-                this.broadcaster.broadcast(new DirectoryAdded());
+                if(this.addWatched(a.getPath())){
+                    this.broadcaster.broadcast(new DirectoryAdded());
+                }
             }
-	}
+            else if (e instanceof RemoveDirectory) {
+                RemoveDirectory r = (RemoveDirectory)e;
+                if(this.removeWatched(r.getPath())){
+                    this.broadcaster.broadcast(new DirectoryRemoved());
+                }
+            }
+            else if (e instanceof AddRule) {
+                AddRule r = (AddRule)e;
+                this.addRule(r.getRegex(), r.getPath());
+            }
+            else if (e instanceof RemoveRule) {
+                RemoveRule r = (RemoveRule)e;
+                this.removeRule(r.getRegex(), r.getPath());
+            }
+        }
     
     /**
      * begin watching directories
@@ -159,21 +184,29 @@ public class Watcher implements Subscriber {
      * 
      * @param p path to begin watching
      */
-    public void addWatched ( Path p ) {
-	try {
-            p.register(watcher, ENTRY_CREATE);
-            directories.add(p);
-	} catch (IOException e) {
-            System.err.println(e);
-	}
+    public Boolean addWatched ( Path p ) {
+        if(!directories.contains(p)){
+            try {
+                p.register(watcher, ENTRY_CREATE);
+                directories.add(p);
+                return true;   
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+        return false;
     }
 	
     /**
      * 
      * @param p path to stop watching
      */
-    public void removeWatched ( Path p ) {
-        directories.remove(p);
+    public Boolean removeWatched ( Path p ) {
+        if(directories.contains(p)){
+            directories.remove(p);
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -206,6 +239,16 @@ public class Watcher implements Subscriber {
      */
     public void setRules ( RuleSet r ) {
         rules = r;
+    }
+    
+    public Boolean addRule ( String r, String p ) {
+        Rule rule = new Rule( r, new Move(p) );
+        return rules.add(rule);
+    }
+    
+    public Boolean removeRule ( String r, String p ) {
+        System.out.println("REMOVE: " + r + " : " + p);
+        return true;
     }
     
 }

@@ -7,7 +7,12 @@ package buckets.ui;
 
 import buckets.data.events.BucketsEvent;
 import buckets.data.events.AddDirectory;
+import buckets.data.events.RemoveDirectory;
 import buckets.data.events.DirectoryAdded;
+import buckets.data.events.AddRule;
+import buckets.data.events.RemoveRule;
+import buckets.rules.RuleSet;
+import buckets.rules.Rule;
 
 import buckets.data.Broadcaster;
 import buckets.data.Subscriber;
@@ -19,20 +24,30 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author mhouse
  */
-public class BucketsUI extends javax.swing.JFrame implements Subscriber {
+public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSelectionListener {
 	private final Broadcaster broadcaster;
 	
     /**
      * Creates new form BucketsUI
      */
     public BucketsUI(Broadcaster b) {
-	// Init and add channels to the broadcaster
-	broadcaster = b;
         initComponents();
+        broadcaster = b;
+    }
+    
+    public void initCustom(){
+        watchList.addListSelectionListener(this);
+    }
+    
+    public void valueChanged(javax.swing.event.ListSelectionEvent e){
+        String selected = watchList.getSelectedValue();
+        watchDirectoryInput.setText(selected);
     }
     
     @Override
@@ -40,6 +55,13 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
     
     public void setDirectories( ArrayList<Path> paths ){
         watchList.setListData(paths.stream()
+            .map(p -> p.toString())
+            .toArray(String[]::new));
+    }
+    
+    public void setRules( RuleSet rules ){
+        ArrayList<Rule> r = rules.asList();  
+        watchList.setListData(r.stream()
             .map(p -> p.toString())
             .toArray(String[]::new));
     }
@@ -64,15 +86,16 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
         watchAdd = new javax.swing.JButton();
         watchRemove = new javax.swing.JButton();
         rulesTab = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        regexEntry = new javax.swing.JTextField();
+        moveToEntry = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        addRuleBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ruleList = new javax.swing.JList<>();
+        removeRuleBtn = new javax.swing.JButton();
 
         filePicker.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
@@ -142,22 +165,19 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
                     .addComponent(watchRemove)
                     .addComponent(watchAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(watchDirectoryList, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(watchDirectoryList, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         Tabs.addTab("Watch", watchTab);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add Rule");
-
         jLabel2.setText("Regex");
 
         jLabel3.setText("Move To");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        regexEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                regexEntryActionPerformed(evt);
             }
         });
 
@@ -168,11 +188,25 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
             }
         });
 
-        jButton2.setText("Add");
+        addRuleBtn.setText("Add");
+        addRuleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRuleBtnActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("<html>Add a regular expression and a location to move the matching file to.</html>");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jScrollPane1.setViewportView(ruleList);
+
+        removeRuleBtn.setText("Remove");
+        removeRuleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeRuleBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout rulesTabLayout = new javax.swing.GroupLayout(rulesTab);
         rulesTab.setLayout(rulesTabLayout);
@@ -182,44 +216,46 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
                 .addContainerGap()
                 .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(rulesTabLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(40, 40, 40)
                         .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
+                            .addGroup(rulesTabLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(34, 34, 34)
+                                .addComponent(regexEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(rulesTabLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(moveToEntry)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(rulesTabLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addRuleBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeRuleBtn)))))
                 .addContainerGap())
         );
         rulesTabLayout.setVerticalGroup(
             rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rulesTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(rulesTabLayout.createSequentialGroup()
-                        .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton2)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(regexEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(rulesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(addRuleBtn)
+                    .addComponent(removeRuleBtn)
+                    .addComponent(moveToEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -252,7 +288,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
     }//GEN-LAST:event_watchDirectoryInputActionPerformed
 
     private void watchRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchRemoveActionPerformed
-        // TODO add your handling code here:
+        RemoveDirectory e = new RemoveDirectory(watchDirectoryInput.getText());
+        broadcaster.broadcast(e);
     }//GEN-LAST:event_watchRemoveActionPerformed
 
     private void watchDirectoryPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchDirectoryPickerActionPerformed
@@ -268,18 +305,28 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
         broadcaster.broadcast(e);
     }//GEN-LAST:event_watchAddActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int result = filePicker.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             String file = filePicker.getSelectedFile().getAbsolutePath();
-            jTextField2.setText(file);
+            moveToEntry.setText(file);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void regexEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regexEntryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regexEntryActionPerformed
+
+    private void addRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRuleBtnActionPerformed
+        AddRule e = new AddRule(regexEntry.getText(),moveToEntry.getText());
+        broadcaster.broadcast(e);
+    }//GEN-LAST:event_addRuleBtnActionPerformed
+
+    private void removeRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRuleBtnActionPerformed
+        RemoveRule e = new RemoveRule(regexEntry.getText(),moveToEntry.getText());
+        broadcaster.broadcast(e);
+    }//GEN-LAST:event_removeRuleBtnActionPerformed
+    
 	
     /**
      * @param args the command line arguments
@@ -295,16 +342,17 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Tabs;
+    private javax.swing.JButton addRuleBtn;
     private javax.swing.JFileChooser filePicker;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField moveToEntry;
+    private javax.swing.JTextField regexEntry;
+    private javax.swing.JButton removeRuleBtn;
+    private javax.swing.JList<String> ruleList;
     private javax.swing.JPanel rulesTab;
     private javax.swing.JButton watchAdd;
     private javax.swing.JTextField watchDirectoryInput;

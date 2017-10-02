@@ -10,6 +10,8 @@ import buckets.data.Broadcaster;
 
 import buckets.data.events.BucketsEvent;
 import buckets.data.events.DirectoryAdded;
+import buckets.data.events.DirectoryRemoved;
+import buckets.data.events.OnLoad;
 import buckets.ui.BucketsUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -30,6 +32,9 @@ public class Manager implements Subscriber {
             
 		watcher = new Watcher(broadcaster);
 		ui = new BucketsUI(broadcaster);
+                
+                ui.initCustom();
+                watcher.start();
 	}
 	
 	public void run () {
@@ -39,9 +44,12 @@ public class Manager implements Subscriber {
 	
 	@Override
 	public void notify ( BucketsEvent e ) {
-            if (e instanceof DirectoryAdded) {
-                ArrayList directories = watcher.getWatched();
-                ui.setDirectories(directories);
+            if (e instanceof DirectoryAdded || e instanceof DirectoryRemoved) {
+                ui.setDirectories(watcher.getWatched());
+            }
+            else if (e instanceof OnLoad) {
+                ui.setDirectories(watcher.getWatched());
+                ui.setRules(watcher.getRules());
             }
         }
 }
