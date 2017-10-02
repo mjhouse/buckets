@@ -48,6 +48,10 @@ public class Rule {
 	action = null;
     }
     
+    public Boolean isEqual ( Rule r ) {
+        return false;
+    }
+    
     /**
      * if the regex pattern matches the given path (p)
      * then the rule's action will be applied.
@@ -87,5 +91,10 @@ public class Rule {
      */
     public void setAction ( Action a ) {
 	action = a;
+    }
+
+    @Override
+    public String toString() {
+        return "Rule{" + "pattern=" + pattern + ", action=" + action + '}';
     }
 }

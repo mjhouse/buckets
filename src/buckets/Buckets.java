@@ -6,6 +6,8 @@
 package buckets;
 
 // logging imports
+import buckets.actions.Move;
+import buckets.rules.Rule;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +25,10 @@ public class Buckets {
 	log.setLevel(Level.INFO);
 	log.info("starting Buckets");
         
-        Manager manager = new Manager();
-		manager.run();
+        //Rule rule = new Rule( "*\.txt", new Move() );
+        
+        //Manager manager = new Manager();
+	//manager.run();
         
         /* LOG DEMO
         // add a file handler for the log. Right now, the path is manual, but when we 

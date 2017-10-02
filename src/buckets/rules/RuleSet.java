@@ -61,8 +61,14 @@ public class RuleSet implements Iterable<Rule> {
      * add a rule to the collection.
      * @param r a new Rule
      */
-    public void add ( Rule r ) {
-	rules.add(r);
+    public Boolean add ( Rule r ) {
+        for ( Rule rule : rules ) {
+            if (rule.isEqual(r)) {
+                return false;
+            }
+        }
+        rules.add(r);
+        return true;
     }
     
     /**
@@ -89,6 +95,11 @@ public class RuleSet implements Iterable<Rule> {
 	    }
 	}
     }
+    
+    public ArrayList<Rule> asList(){
+        return rules;
+    }
+    
     
     /**
      * implementation for iterable interface
