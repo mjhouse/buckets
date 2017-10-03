@@ -5,14 +5,7 @@
  */
 package buckets;
 
-import buckets.data.events.BucketsEvent;
-import buckets.data.events.AddDirectory;
-import buckets.data.events.RemoveDirectory;
-import buckets.data.events.DirectoryAdded;
-import buckets.data.events.DirectoryRemoved;
-import buckets.data.events.OnLoad;
-import buckets.data.events.AddRule;
-import buckets.data.events.RemoveRule;
+import buckets.data.events.*;
 
 import buckets.data.Broadcaster;
 
@@ -71,37 +64,44 @@ public class Watcher implements Subscriber {
 			watcher = FileSystems.getDefault().newWatchService();
 			for ( String s : dirs ) {
 				Path absp = Paths.get(s).toAbsolutePath();
-				this.addWatched(absp);
+				this.addWatched(absp.toString());
 			}	
 		} catch (IOException e) {
 			
 		}
-                
-                this.broadcaster.broadcast(new OnLoad());
     }
 	
 	@Override
 	public void notify ( BucketsEvent e ) {
-            if (e instanceof AddDirectory) {
-                AddDirectory a = (AddDirectory)e;
-                if(this.addWatched(a.getPath())){
-                    this.broadcaster.broadcast(new DirectoryAdded());
-                }
-            }
-            else if (e instanceof RemoveDirectory) {
-                RemoveDirectory r = (RemoveDirectory)e;
-                if(this.removeWatched(r.getPath())){
-                    this.broadcaster.broadcast(new DirectoryRemoved());
-                }
-            }
-            else if (e instanceof AddRule) {
-                AddRule r = (AddRule)e;
-                this.addRule(r.getRegex(), r.getPath());
-            }
-            else if (e instanceof RemoveRule) {
-                RemoveRule r = (RemoveRule)e;
-                this.removeRule(r.getRegex(), r.getPath());
-            }
+		EventData data, regex, path;
+		switch (e.type()) {
+			case ADD_DIRECTORY: 
+				data = e.get("path");
+				if (data != null && this.addWatched(data.asString())) {
+					this.broadcaster.broadcast(new BucketsEvent(EventType.DIRECTORY_ADD));
+				}
+				break;
+			case DEL_DIRECTORY:
+				data = e.get("path");
+				if (data != null && this.removeWatched(data.asString())) {
+					this.broadcaster.broadcast(new BucketsEvent(EventType.DIRECTORY_DEL));
+				}
+				break;
+			case ADD_RULE:
+				regex = e.get("regex");
+				path = e.get("path");
+				if (regex != null && path != null && this.addRule(regex.asString(),path.asString())) {
+					this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_ADD));
+				}
+				break;
+			case DEL_RULE:
+				regex = e.get("regex");
+				path = e.get("path");
+				if (regex != null && path != null && this.removeRule(regex.asString(),path.asString())) {
+					this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
+				}
+				break;
+		}
         }
     
     /**
@@ -184,7 +184,8 @@ public class Watcher implements Subscriber {
      * 
      * @param p path to begin watching
      */
-    public Boolean addWatched ( Path p ) {
+    public Boolean addWatched ( String s ) {
+		Path p = Paths.get(s);
         if(!directories.contains(p)){
             try {
                 p.register(watcher, ENTRY_CREATE);
@@ -201,7 +202,8 @@ public class Watcher implements Subscriber {
      * 
      * @param p path to stop watching
      */
-    public Boolean removeWatched ( Path p ) {
+    public Boolean removeWatched ( String s ) {
+		Path p = Paths.get(s);
         if(directories.contains(p)){
             directories.remove(p);
             return true;
@@ -243,12 +245,12 @@ public class Watcher implements Subscriber {
     
     public Boolean addRule ( String r, String p ) {
         Rule rule = new Rule( r, new Move(p) );
-        return rules.add(rule);
+		return rules.add(rule);
     }
     
     public Boolean removeRule ( String r, String p ) {
-        System.out.println("REMOVE: " + r + " : " + p);
-        return true;
+        Rule rule = new Rule( r, new Move(p) );
+		return rules.remove(rule);
     }
     
 }

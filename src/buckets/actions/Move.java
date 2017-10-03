@@ -59,7 +59,7 @@ public class Move extends Action {
 		return output;
 	}
 	
-	public Boolean isEqual( Action a ){
+	public Boolean Equal( Action a ){
 		if(a instanceof Move){
 			Move b = (Move)a;
 			Boolean paths = output.equals(b.getPath());
@@ -67,4 +67,10 @@ public class Move extends Action {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Move { " + "output=" + output + " }";
+	}
+	
 }

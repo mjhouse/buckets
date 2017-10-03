@@ -63,7 +63,7 @@ public class RuleSet implements Iterable<Rule> {
      */
     public Boolean add ( Rule r ) {
         for ( Rule rule : rules ) {
-            if (rule.isEqual(r)) {
+            if (rule.Equal(r)) {
                 return false;
             }
         }
@@ -75,8 +75,18 @@ public class RuleSet implements Iterable<Rule> {
      * remove a Rule by index
      * @param i index of the Rule to remove.
      */
-    public void remove ( int i ) {
-	rules.remove(i);
+    public Boolean remove ( Rule r ) {
+		Boolean result = false;
+		ArrayList<Rule> nrules = new ArrayList();
+		for ( Rule n : rules ) {
+			if (!n.Equal(r)){
+				nrules.add(n);
+			} else {
+				result = true;
+			}
+		}
+		rules = nrules;
+		return result;
     }
     
     /**

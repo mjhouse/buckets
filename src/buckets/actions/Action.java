@@ -28,5 +28,5 @@ public abstract class Action {
      */
     public abstract void apply( Path p ) throws IOException;
 	
-	public abstract Boolean isEqual( Action a );
+	public abstract Boolean Equal( Action a );
 }

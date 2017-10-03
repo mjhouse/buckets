@@ -5,12 +5,7 @@
  */
 package buckets.ui;
 
-import buckets.data.events.BucketsEvent;
-import buckets.data.events.AddDirectory;
-import buckets.data.events.RemoveDirectory;
-import buckets.data.events.DirectoryAdded;
-import buckets.data.events.AddRule;
-import buckets.data.events.RemoveRule;
+import buckets.data.events.*;
 import buckets.rules.RuleSet;
 import buckets.rules.Rule;
 
@@ -61,7 +56,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     
     public void setRules( RuleSet rules ){
         ArrayList<Rule> r = rules.asList();  
-        watchList.setListData(r.stream()
+        ruleList.setListData(r.stream()
             .map(p -> p.toString())
             .toArray(String[]::new));
     }
@@ -288,7 +283,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }//GEN-LAST:event_watchDirectoryInputActionPerformed
 
     private void watchRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchRemoveActionPerformed
-        RemoveDirectory e = new RemoveDirectory(watchDirectoryInput.getText());
+		BucketsEvent e = new BucketsEvent(EventType.DEL_DIRECTORY)
+			.add(new EventData("path",watchDirectoryInput.getText()));
         broadcaster.broadcast(e);
     }//GEN-LAST:event_watchRemoveActionPerformed
 
@@ -301,7 +297,9 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }//GEN-LAST:event_watchDirectoryPickerActionPerformed
 
     private void watchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchAddActionPerformed
-        AddDirectory e = new AddDirectory(watchDirectoryInput.getText());
+		BucketsEvent e = new BucketsEvent(EventType.ADD_DIRECTORY)
+			.add(new EventData("path",watchDirectoryInput.getText()));
+		
         broadcaster.broadcast(e);
     }//GEN-LAST:event_watchAddActionPerformed
 
@@ -318,12 +316,18 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }//GEN-LAST:event_regexEntryActionPerformed
 
     private void addRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRuleBtnActionPerformed
-        AddRule e = new AddRule(regexEntry.getText(),moveToEntry.getText());
+		BucketsEvent e = new BucketsEvent(EventType.ADD_RULE)
+			.add(new EventData("regex",regexEntry.getText()))
+			.add(new EventData("path",moveToEntry.getText()));
+		
         broadcaster.broadcast(e);
     }//GEN-LAST:event_addRuleBtnActionPerformed
 
     private void removeRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRuleBtnActionPerformed
-        RemoveRule e = new RemoveRule(regexEntry.getText(),moveToEntry.getText());
+		BucketsEvent e = new BucketsEvent(EventType.DEL_RULE)
+			.add(new EventData("regex",regexEntry.getText()))
+			.add(new EventData("path",moveToEntry.getText()));
+		
         broadcaster.broadcast(e);
     }//GEN-LAST:event_removeRuleBtnActionPerformed
     
