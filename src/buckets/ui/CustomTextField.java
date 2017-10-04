@@ -13,7 +13,7 @@ public class CustomTextField extends JTextField {
  
     private Font originalFont;
     private Color originalForeground;
-    private Color placeholderForeground = new Color(160, 160, 160);
+    private Color placeholderForeground;
     private boolean textWrittenIn;
  
     public CustomTextField() {
@@ -54,9 +54,16 @@ public class CustomTextField extends JTextField {
     public void setTextWrittenIn(boolean textWrittenIn) {
         this.textWrittenIn = textWrittenIn;
     }
- 
+
+    public void warn() {
+        if (getText().trim().length() != 0) {
+            setFont(originalFont);
+            setForeground(originalForeground);
+            setTextWrittenIn(true);
+        }
+    }
+    
     public void setPlaceholder(final String text) {
- 
         this.customizeText(text);
  
         this.getDocument().addDocumentListener(new DocumentListener() {
@@ -74,15 +81,7 @@ public class CustomTextField extends JTextField {
             public void changedUpdate(DocumentEvent e) {
                 warn();
             }
- 
-            public void warn() {
-                if (getText().trim().length() != 0) {
-                    setFont(originalFont);
-                    setForeground(originalForeground);
-                    setTextWrittenIn(true);
-                }
- 
-            }
+
         });
  
         this.addFocusListener(new FocusListener() {
@@ -107,7 +106,7 @@ public class CustomTextField extends JTextField {
  
     private void customizeText(String text) {
         setText(text);
-        setFont(new Font(getFont().getFamily(), Font.ITALIC, getFont().getSize()));
+        setFont(new Font(getFont().getFamily(), Font.PLAIN, getFont().getSize()));
         setForeground(getPlaceholderForeground());
         setTextWrittenIn(false);
     }

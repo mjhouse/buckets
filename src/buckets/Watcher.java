@@ -106,6 +106,9 @@ public class Watcher implements Subscriber {
 					this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
 				}
 				break;
+                        case EXIT:
+                            this.stop();
+                            break;
 		}
         }
     

@@ -90,7 +90,7 @@ public class RuleSet implements Iterable<Rule> {
     }
 	
 	public Boolean remove ( int i ) {
-		if ( rules.size() > i && i > 0 ) {
+		if ( rules.size() > i && i >= 0 ) {
 			rules.remove(i);
 			return true;
 		}

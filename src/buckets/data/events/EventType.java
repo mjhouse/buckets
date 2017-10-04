@@ -19,4 +19,5 @@ public enum EventType {
 	RULE_DEL,
 	RULE_ADD,
 	INIT_ALL,
+        EXIT,
 }
