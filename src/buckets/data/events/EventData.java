@@ -21,4 +21,8 @@ public class EventData<T> {
 	public String asString () {
 		return (String)value;
 	}
+	
+	public Integer asInt () {
+		return (Integer)value;
+	}
 }

@@ -88,6 +88,14 @@ public class RuleSet implements Iterable<Rule> {
 		rules = nrules;
 		return result;
     }
+	
+	public Boolean remove ( int i ) {
+		if ( rules.size() > i && i > 0 ) {
+			rules.remove(i);
+			return true;
+		}
+		return false;
+	}
     
     /**
      * apply each Rule in the collection until one matches.
@@ -109,6 +117,11 @@ public class RuleSet implements Iterable<Rule> {
     public ArrayList<Rule> asList(){
         return rules;
     }
+
+	@Override
+	public String toString() {
+		return "RuleSet{" + "rules=" + rules + '}';
+	}
     
     
     /**

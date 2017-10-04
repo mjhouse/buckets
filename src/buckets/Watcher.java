@@ -73,7 +73,7 @@ public class Watcher implements Subscriber {
 	
 	@Override
 	public void notify ( BucketsEvent e ) {
-		EventData data, regex, path;
+		EventData data, regex, path, idx;
 		switch (e.type()) {
 			case ADD_DIRECTORY: 
 				data = e.get("path");
@@ -97,7 +97,12 @@ public class Watcher implements Subscriber {
 			case DEL_RULE:
 				regex = e.get("regex");
 				path = e.get("path");
+				idx = e.get("index");
 				if (regex != null && path != null && this.removeRule(regex.asString(),path.asString())) {
+					this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
+				}
+				else if (idx != null) {
+					Boolean r = this.removeRule(idx.asInt());
 					this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
 				}
 				break;
@@ -251,6 +256,10 @@ public class Watcher implements Subscriber {
     public Boolean removeRule ( String r, String p ) {
         Rule rule = new Rule( r, new Move(p) );
 		return rules.remove(rule);
+    }
+	
+    public Boolean removeRule ( Integer idx ) {
+		return rules.remove(idx);
     }
     
 }
