@@ -8,15 +8,9 @@ package buckets;
 import buckets.data.Subscriber;
 import buckets.data.Broadcaster;
 
-import buckets.data.events.BucketsEvent;
-import buckets.data.events.DirectoryAdded;
-import buckets.data.events.DirectoryRemoved;
-import buckets.data.events.OnLoad;
+import buckets.data.events.*;
 import buckets.ui.BucketsUI;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -25,31 +19,40 @@ import java.util.ArrayList;
 public class Manager implements Subscriber {
 	private BucketsUI ui;
 	private Watcher watcher;
-        public Broadcaster broadcaster;
+    public Broadcaster broadcaster;
 	
 	public Manager () {
-                broadcaster = new Broadcaster();
+        broadcaster = new Broadcaster();
             
 		watcher = new Watcher(broadcaster);
 		ui = new BucketsUI(broadcaster);
                 
-                ui.initCustom();
-                watcher.start();
+        ui.initCustom();
+        watcher.start();
 	}
 	
 	public void run () {
-                broadcaster.subscribe( watcher, ui, this );
+        broadcaster.subscribe( watcher, ui, this );
 		EventQueue.invokeLater(() -> { this.ui.setVisible(true); });
+		
+		this.broadcaster.broadcast(new BucketsEvent(EventType.INIT_ALL));
 	}
 	
 	@Override
 	public void notify ( BucketsEvent e ) {
-            if (e instanceof DirectoryAdded || e instanceof DirectoryRemoved) {
-                ui.setDirectories(watcher.getWatched());
-            }
-            else if (e instanceof OnLoad) {
+		switch (e.type()) {
+			case DIRECTORY_ADD:
+			case DIRECTORY_DEL:
+				ui.setDirectories(watcher.getWatched());
+				break;
+			case RULE_ADD:
+			case RULE_DEL:
+				ui.setRules(watcher.getRules());
+				break;
+			case INIT_ALL:
                 ui.setDirectories(watcher.getWatched());
                 ui.setRules(watcher.getRules());
-            }
-        }
+				break;
+		}
+	}
 }

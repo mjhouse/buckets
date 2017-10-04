@@ -25,16 +25,14 @@ public class Buckets {
 	log.setLevel(Level.INFO);
 	log.info("starting Buckets");
         
-        //Rule rule = new Rule( "*\.txt", new Move() );
+    Manager manager = new Manager();
+	manager.run();
         
-        //Manager manager = new Manager();
-	//manager.run();
-        
-        /* LOG DEMO
-        // add a file handler for the log. Right now, the path is manual, but when we 
-        // have persistant configuration, we'll have an option for this.
-        try { log.addHandler(new FileHandler("/home/mhouse/Projects/java/buckets/data/logs/buckets.log"));}
-        catch (IOException e) { log.warning(e.toString()); }
+    /* LOG DEMO
+    // add a file handler for the log. Right now, the path is manual, but when we 
+    // have persistant configuration, we'll have an option for this.
+    try { log.addHandler(new FileHandler("/home/mhouse/Projects/java/buckets/data/logs/buckets.log"));}
+    catch (IOException e) { log.warning(e.toString()); }
 	*/
         
         /* DATABASE DEMO

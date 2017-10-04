@@ -48,8 +48,10 @@ public class Rule {
 	action = null;
     }
     
-    public Boolean isEqual ( Rule r ) {
-        return false;
+    public Boolean Equal ( Rule r ) {
+		Boolean patterns = pattern.pattern().equals( r.getPattern().pattern() );
+		Boolean actions = action.Equal(r.getAction());
+        return patterns && actions;
     }
     
     /**
@@ -95,6 +97,6 @@ public class Rule {
 
     @Override
     public String toString() {
-        return "Rule{" + "pattern=" + pattern + ", action=" + action + '}';
+        return "Rule { " + "pattern=" + pattern + ", action=" + action + " }";
     }
 }

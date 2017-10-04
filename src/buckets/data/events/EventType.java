@@ -9,6 +9,14 @@ package buckets.data.events;
  *
  * @author mhouse
  */
-public class DirectoryRemoved extends BucketsEvent {
-    
+public enum EventType {
+	ADD_DIRECTORY,
+	DEL_DIRECTORY,
+	DIRECTORY_DEL,
+	DIRECTORY_ADD,
+	ADD_RULE,
+	DEL_RULE,
+	RULE_DEL,
+	RULE_ADD,
+	INIT_ALL,
 }
