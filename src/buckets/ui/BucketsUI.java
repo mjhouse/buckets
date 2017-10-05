@@ -102,7 +102,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
         removeRuleBtn = new javax.swing.JButton();
         regexEntry = new buckets.ui.CustomTextField();
         moveToEntry = new buckets.ui.CustomTextField();
-        jLabel1 = new javax.swing.JLabel();
+        messageBar = new javax.swing.JLabel();
 
         filePicker.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
@@ -114,7 +114,6 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
             }
         });
 
-        Tabs.setBorder(null);
         Tabs.setForeground(new java.awt.Color(1, 1, 1));
         Tabs.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
 
@@ -279,14 +278,14 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
 
         Tabs.addTab("Rules", rulesTab);
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("test");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabel1.setFocusable(false);
-        jLabel1.setInheritsPopupMenu(false);
-        jLabel1.setRequestFocusEnabled(false);
-        jLabel1.setVerifyInputWhenFocusTarget(false);
+        messageBar.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        messageBar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        messageBar.setText("test");
+        messageBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        messageBar.setFocusable(false);
+        messageBar.setInheritsPopupMenu(false);
+        messageBar.setRequestFocusEnabled(false);
+        messageBar.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,7 +295,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(messageBar, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -305,7 +304,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
                 .addContainerGap()
                 .addComponent(Tabs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(messageBar)
                 .addGap(5, 5, 5))
         );
 
@@ -383,8 +382,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     private javax.swing.JButton addRuleBtn;
     private javax.swing.JFileChooser filePicker;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel messageBar;
     private buckets.ui.CustomTextField moveToEntry;
     private buckets.ui.CustomTextField regexEntry;
     private javax.swing.JButton removeRuleBtn;
