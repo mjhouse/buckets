@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Sep 21 06:23:32 CDT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-a42d-b65c-000015d32b28 
+Sat Sep 30 04:38:51 CDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-d227-1969-000015d32b30 
 on database directory /home/mhouse/Projects/java/buckets/buckets with class loader sun.misc.Launcher$AppClassLoader@5e481248 
 Loaded from file:/home/mhouse/Projects/java/buckets/deps/db-derby-10.13.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -8,6 +8,6 @@ java.runtime.version=1.8.0_131-8u131-b11-2ubuntu1.16.04.3-b11
 user.dir=/home/mhouse/Projects/java/buckets
 os.name=Linux
 os.arch=amd64
-os.version=4.10.0-32-generic
+os.version=4.10.0-35-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

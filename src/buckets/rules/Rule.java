@@ -48,6 +48,12 @@ public class Rule {
 	action = null;
     }
     
+    public Boolean Equal ( Rule r ) {
+		Boolean patterns = pattern.pattern().equals( r.getPattern().pattern() );
+		Boolean actions = action.Equal(r.getAction());
+        return patterns && actions;
+    }
+    
     /**
      * if the regex pattern matches the given path (p)
      * then the rule's action will be applied.
@@ -87,5 +93,10 @@ public class Rule {
      */
     public void setAction ( Action a ) {
 	action = a;
+    }
+
+    @Override
+    public String toString() {
+        return "Rule { " + "pattern=" + pattern + ", action=" + action + " }";
     }
 }

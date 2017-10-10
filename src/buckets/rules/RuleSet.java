@@ -61,17 +61,41 @@ public class RuleSet implements Iterable<Rule> {
      * add a rule to the collection.
      * @param r a new Rule
      */
-    public void add ( Rule r ) {
-	rules.add(r);
+    public Boolean add ( Rule r ) {
+        for ( Rule rule : rules ) {
+            if (rule.Equal(r)) {
+                return false;
+            }
+        }
+        rules.add(r);
+        return true;
     }
     
     /**
      * remove a Rule by index
      * @param i index of the Rule to remove.
      */
-    public void remove ( int i ) {
-	rules.remove(i);
+    public Boolean remove ( Rule r ) {
+		Boolean result = false;
+		ArrayList<Rule> nrules = new ArrayList();
+		for ( Rule n : rules ) {
+			if (!n.Equal(r)){
+				nrules.add(n);
+			} else {
+				result = true;
+			}
+		}
+		rules = nrules;
+		return result;
     }
+	
+	public Boolean remove ( int i ) {
+		if ( rules.size() > i && i >= 0 ) {
+			rules.remove(i);
+			return true;
+		}
+		return false;
+	}
     
     /**
      * apply each Rule in the collection until one matches.
@@ -89,6 +113,16 @@ public class RuleSet implements Iterable<Rule> {
 	    }
 	}
     }
+    
+    public ArrayList<Rule> asList(){
+        return rules;
+    }
+
+	@Override
+	public String toString() {
+		return "RuleSet{" + "rules=" + rules + '}';
+	}
+    
     
     /**
      * implementation for iterable interface
