@@ -63,9 +63,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     @Override
     public void notify ( BucketsEvent e ) {}
     
-    public void setDirectories( ArrayList<Path> paths ){
+    public void setDirectories( ArrayList<String> paths ){
         watchList.setListData(paths.stream()
-            .map(p -> p.toString())
             .toArray(String[]::new));
     }
     

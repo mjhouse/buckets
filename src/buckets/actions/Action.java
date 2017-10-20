@@ -7,14 +7,17 @@ package buckets.actions;
 
 // system imports
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Path;
+import javax.persistence.Embeddable;
 
 
 /**
  * the abstract base class for actions.
  * @author mhouse
  */
-public abstract class Action {
+@Embeddable
+public abstract class Action implements Serializable {
     
     /**
      * constructor for abstract class
@@ -28,5 +31,5 @@ public abstract class Action {
      */
     public abstract void apply( Path p ) throws IOException;
 	
-	public abstract Boolean Equal( Action a );
+    public abstract Boolean Equal( Action a );
 }

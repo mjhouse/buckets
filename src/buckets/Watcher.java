@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 // file/path objects
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -34,6 +35,9 @@ import java.util.concurrent.CompletableFuture;
 
 // logging imports
 import java.util.logging.Logger;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * watches a given collection of directories and notifies
@@ -41,34 +45,53 @@ import java.util.logging.Logger;
  * 
  * @author mhouse
  */
-public class Watcher implements Subscriber {
-    private static Logger log = Logger.getLogger("buckets.watcher");
+@Entity
+public class Watcher implements Subscriber, Serializable {
+    transient private static final Logger log = Logger.getLogger("buckets.watcher");
     
-    private final Broadcaster broadcaster;
-    private ArrayList<Path> directories;
-    private RuleSet rules;
-    private WatchService watcher;
-    private Boolean running;
+    transient private Broadcaster broadcaster;
+    private ArrayList<String> directories;
+    transient private RuleSet rules;
+    transient private WatchService watcher;
+    transient private Boolean running;
+
+    
+    @Id @GeneratedValue
+    private long id;
+    
+    /**
+     * 
+     * @param dirs directories to watch
+     */
+    public Watcher () {
+	broadcaster = null;
+        directories = new ArrayList();
+        rules = new RuleSet();
+	running = false;
+    }
     
     /**
      * 
      * @param dirs directories to watch
      */
     public Watcher ( Broadcaster b, String...dirs ) {
-		broadcaster = b;
-                directories = new ArrayList();
+		directories = new ArrayList();
 		rules = new RuleSet();
 		running = false;
 		
-		try {
-			watcher = FileSystems.getDefault().newWatchService();
-			for ( String s : dirs ) {
-				Path absp = Paths.get(s).toAbsolutePath();
-				this.addWatched(absp.toString());
-			}	
-		} catch (IOException e) {
-			
-		}
+		init(b,dirs);
+    }
+    
+    public void init (Broadcaster b, String...dirs) {
+        broadcaster = b;
+        try {
+            watcher = FileSystems.getDefault().newWatchService();
+            for ( String s : dirs ) {
+                Path absp = Paths.get(s).toAbsolutePath();
+                this.addWatched(absp.toString());
+            }	
+        } catch (IOException e) {	
+        }
     }
 	
 	@Override
@@ -83,6 +106,7 @@ public class Watcher implements Subscriber {
 				break;
 			case DEL_DIRECTORY:
 				data = e.get("path");
+                                System.out.println(data.asString());
 				if (data != null && this.removeWatched(data.asString())) {
 					this.broadcaster.broadcast(new BucketsEvent(EventType.DIRECTORY_DEL));
 				}
@@ -176,7 +200,7 @@ public class Watcher implements Subscriber {
      * 
      * @return the directories being watched 
      */
-    public ArrayList<Path> getWatched () {
+    public ArrayList<String> getWatched () {
         return directories;
     }
     
@@ -184,7 +208,7 @@ public class Watcher implements Subscriber {
      * 
      * @param p paths to begin watching 
      */
-    public void setWatched ( ArrayList<Path> p ) {
+    public void setWatched ( ArrayList<String> p ) {
         directories = p;
     }
 	
@@ -193,12 +217,12 @@ public class Watcher implements Subscriber {
      * @param p path to begin watching
      */
     public Boolean addWatched ( String s ) {
-		Path p = Paths.get(s);
-        if(!directories.contains(p)){
+        if(!directories.contains(s)){
             try {
+                Path p = Paths.get(s).toAbsolutePath();
                 p.register(watcher, ENTRY_CREATE);
-                directories.add(p);
-                return true;   
+                directories.add(p.toString());
+                return true;
             } catch (IOException e) {
                 System.err.println(e);
             }
@@ -211,9 +235,8 @@ public class Watcher implements Subscriber {
      * @param p path to stop watching
      */
     public Boolean removeWatched ( String s ) {
-		Path p = Paths.get(s);
-        if(directories.contains(p)){
-            directories.remove(p);
+        if(directories.contains(s)){
+            directories.remove(s);
             return true;
         }
         return false;

@@ -105,7 +105,7 @@ public class RuleSet implements Iterable<Rule> {
 	for ( Rule r : this.rules ) {
 	    try {
 		if (r.apply(p)) {
-                    log.info(String.format("found rule: \"%s\"", r.getPattern()));
+                    log.info(String.format("found rule: \"%s\"", r.getRegex()));
                     return;
                 }
 	    } catch (IOException e) {

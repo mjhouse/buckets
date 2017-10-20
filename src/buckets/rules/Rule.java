@@ -5,6 +5,9 @@
  */
 package buckets.rules;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 // local imports
 import buckets.actions.Action;
 
@@ -24,46 +27,63 @@ import java.util.logging.Logger;
  * 
  * @author mhouse
  */
-public class Rule {
+@Entity
+public class Rule implements Serializable {
     private static Logger log = Logger.getLogger("buckets.rules.rule");
-    private final Pattern pattern;
-    private Action action;
+    transient private Pattern regex;
+    private String pattern;
     
+    @Embedded private Action action;
+    
+    @Id @GeneratedValue
+    private long id;
+
     /**
-     * construct a rule with a regex pattern and an action
-     * @param r the regular expression pattern to match with
+     * construct an empty rule
+     */
+    public Rule () {
+        pattern = "";
+        regex = null;
+        action = null;
+    }
+
+    /**
+     * construct a rule with a regex regex and an action
+     * @param r the regular expression regex to match with
      * @param a the action to apply to the matched path
      */
     public Rule ( String r, Action a ) {
-        pattern = Pattern.compile(r);
+        pattern = r;
+        regex = Pattern.compile(r);
         action = a;
     }
     
     /**
-     * construct a rule with only a pattern
+     * construct a rule with only a regex
      * @param r the regular expression patter to match with
      */
     public Rule ( String r ) {
-	pattern = Pattern.compile(r);
+        pattern = r;
+	regex = Pattern.compile(r);
 	action = null;
     }
     
     public Boolean Equal ( Rule r ) {
-		Boolean patterns = pattern.pattern().equals( r.getPattern().pattern() );
-		Boolean actions = action.Equal(r.getAction());
+	Boolean patterns = getRegex().pattern().equals( r.getRegex().pattern() );
+	Boolean actions = action.Equal(r.getAction());
         return patterns && actions;
     }
     
     /**
-     * if the regex pattern matches the given path (p)
-     * then the rule's action will be applied.
+     * if the regex regex matches the given path (p)
+ then the rule's action will be applied.
      * 
      * @param p the path to match 
      * @throws IOException 
      * @return bool indicating match
      */
     public Boolean apply ( Path p ) throws IOException {
-        Matcher matcher = pattern.matcher(p.toString());
+        Matcher matcher = regex.matcher(p.toString());
 	Boolean match = matcher.matches(); 
         if (match && action!=null) {
             action.apply( p );
@@ -72,11 +92,28 @@ public class Rule {
     }
   
     /**
-     * get the pattern for this rule
-     * @return the compiled regex pattern
+     * get the regex for this rule
+     * @return the compiled regex regex
      */
-    public Pattern getPattern () {
+    public Pattern getRegex () {
+        if(regex==null){ regex = Pattern.compile(pattern); }
+	return regex;
+    }
+
+    /**
+     * get the regex pattern for this rule
+     * @return the string pattern
+     */
+    public String getPattern () {
 	return pattern;
+    }
+    
+    /**
+     * set the regex for this rule
+     */
+    public void setPattern ( String p ) {
+        pattern = p;
+	regex = Pattern.compile(p);
     }
     
     /**

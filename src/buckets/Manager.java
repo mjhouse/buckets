@@ -7,6 +7,10 @@ package buckets;
 
 import buckets.data.Subscriber;
 import buckets.data.Broadcaster;
+import buckets.data.DBManager;
+
+import buckets.rules.Rule;
+import buckets.rules.RuleSet;
 
 import buckets.data.events.*;
 import buckets.ui.BucketsUI;
@@ -19,24 +23,45 @@ import java.awt.EventQueue;
 public class Manager implements Subscriber {
 	private BucketsUI ui;
 	private Watcher watcher;
-    public Broadcaster broadcaster;
-	
+        private DBManager database;
+        public Broadcaster broadcaster;
+        
 	public Manager () {
-        broadcaster = new Broadcaster();
+            // set up a shutdown hook for clean up
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() { onShutdown(); }
+            });
             
-		watcher = new Watcher(broadcaster);
-		ui = new BucketsUI(broadcaster);
-                
-        ui.initCustom();
-        watcher.start();
+            
+            
+            broadcaster = new Broadcaster();
+            database = new DBManager("$objectdb/db/buckets.odb");
+            
+            ui = new BucketsUI(broadcaster);
+            
+            watcher = database.loadWatcher();
+            watcher.init(broadcaster);
+            watcher.setRules( database.loadRules() );
+            
+            ui.initCustom();
+            watcher.start();
 	}
 	
 	public void run () {
-        broadcaster.subscribe( watcher, ui, this );
-		EventQueue.invokeLater(() -> { this.ui.setVisible(true); });
+            broadcaster.subscribe( watcher, ui, this );
+            EventQueue.invokeLater(() -> { this.ui.setVisible(true); });
 		
-		this.broadcaster.broadcast(new BucketsEvent(EventType.INIT_ALL));
+            this.broadcaster.broadcast(new BucketsEvent(EventType.INIT_ALL));
 	}
+        
+        private void onShutdown() {
+            RuleSet rules = watcher.getRules();
+            database.clear();
+            database.save(rules);
+            database.save(watcher);
+            database.exit();
+        }
 	
 	@Override
 	public void notify ( BucketsEvent e ) {

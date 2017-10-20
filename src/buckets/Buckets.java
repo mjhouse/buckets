@@ -25,7 +25,7 @@ public class Buckets {
 	log.setLevel(Level.INFO);
 	log.info("starting Buckets");
         
-    Manager manager = new Manager();
+        Manager manager = new Manager();
 	manager.run();
         
     /* LOG DEMO
@@ -33,19 +33,19 @@ public class Buckets {
     // have persistant configuration, we'll have an option for this.
     try { log.addHandler(new FileHandler("/home/mhouse/Projects/java/buckets/data/logs/buckets.log"));}
     catch (IOException e) { log.warning(e.toString()); }
-	*/
+    */
         
-        /* DATABASE DEMO
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:derby:buckets;create=true");
-            conn.setAutoCommit(false);
+    /* DATABASE DEMO
+    try {
+        Connection conn = DriverManager.getConnection("jdbc:derby:buckets;create=true");
+        conn.setAutoCommit(false);
             
-            Statement s = conn.createStatement();
-            s.execute("create table location(num int, addr varchar(40))");
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        */
+        Statement s = conn.createStatement();
+        s.execute("create table location(num int, addr varchar(40))");
+    } catch (SQLException e) {
+        System.out.println(e);
+    }
+    */
         
     }
     
