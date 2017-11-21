@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
 
 // watch events
 import static java.nio.file.StandardWatchEventKinds.*;
@@ -52,6 +53,7 @@ public class Watcher implements Subscriber, Serializable {
 
     transient private Broadcaster broadcaster;
     private ArrayList<String> directories;
+    transient private ArrayList<String> backlog;
     transient private RuleSet rules;
     transient private WatchService watcher;
     transient private Boolean running;
@@ -67,6 +69,7 @@ public class Watcher implements Subscriber, Serializable {
     public Watcher() {
         broadcaster = null;
         directories = new ArrayList();
+        backlog = new ArrayList();
         rules = new RuleSet();
         running = false;
     }
@@ -77,6 +80,7 @@ public class Watcher implements Subscriber, Serializable {
      */
     public Watcher(Broadcaster b, String... dirs) {
         directories = new ArrayList();
+        backlog = new ArrayList();
         rules = new RuleSet();
         running = false;
 
@@ -171,6 +175,19 @@ public class Watcher implements Subscriber, Serializable {
     private void run() {
         WatchKey key;
         while (running) {
+
+            if(backlog.size()>0){
+                ArrayList<String> rmlist = new ArrayList();
+                for(String s : backlog){
+                    if(!isChanging(s)){
+                        Path p = Paths.get(s);
+                        rmlist.add(s);
+                        rules.apply(p);
+                    }
+                }
+                backlog.removeAll(rmlist);
+            }
+
             // poll for events from watcher
             if ((key = watcher.poll()) == null) {
                 continue;
@@ -189,9 +206,15 @@ public class Watcher implements Subscriber, Serializable {
                     // build an absolute path with the directory and 
                     // file name.
                     Path abspath = dir.resolve(ev.context());
-
-                    // do something with the absolute path.
-                    rules.apply(abspath);
+                    String abstr = abspath.toString();
+                    if(!isChanging(abstr)){
+                        // do something with the absolute path.
+                        rules.apply(abspath);   
+                    } else {
+                        if(!backlog.contains(abstr)){
+                            backlog.add(abstr);
+                        }
+                    }
                 } else {
                     key.cancel();
                 }
@@ -204,6 +227,21 @@ public class Watcher implements Subscriber, Serializable {
         }
     }
 
+    private Boolean isChanging( String p ){
+        try {
+            File file = new File(p);
+            long first = file.lastModified();
+            Thread.sleep(4000);   
+            long last = file.lastModified();
+            if(last==first){
+                return false;
+            }
+            return true;
+        } catch (InterruptedException err){
+            return true;
+        }
+    }
+    
     /* ---------------------------------------------------------------------- */
  /* Getters/Setters */
     /**
@@ -230,7 +268,7 @@ public class Watcher implements Subscriber, Serializable {
         if (!directories.contains(s)) {
             try {
                 Path p = Paths.get(s).toAbsolutePath();
-                p.register(watcher, ENTRY_CREATE);
+                p.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
                 directories.add(p.toString());
                 return true;
             } catch (IOException e) {
@@ -244,7 +282,7 @@ public class Watcher implements Subscriber, Serializable {
         for(String s : directories){
             try {
                 Path p = Paths.get(s);
-                p.register(watcher, ENTRY_CREATE);
+                p.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
             } catch (IOException e) {
                 System.err.println(e);
             }

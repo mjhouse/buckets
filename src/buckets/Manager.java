@@ -41,8 +41,8 @@ public class Manager implements Subscriber {
             ui = new BucketsUI(broadcaster);
             
             watcher = database.loadWatcher();
-            watcher.init(broadcaster);
             watcher.setRules( database.loadRules() );
+            watcher.init(broadcaster);
             
             ui.initCustom();
             watcher.start();

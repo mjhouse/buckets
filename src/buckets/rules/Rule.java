@@ -83,6 +83,9 @@ public class Rule implements Serializable {
      * @return bool indicating match
      */
     public Boolean apply ( Path p ) throws IOException {
+        if(regex==null&&!pattern.isEmpty()){
+            regex = Pattern.compile(pattern);
+        }
         Matcher matcher = regex.matcher(p.toString());
 	Boolean match = matcher.matches(); 
         if (match && action!=null) {
