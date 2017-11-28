@@ -1,0 +1,870 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:33:06 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 9797@blackbox
+
+[2017-11-27 14:33:06 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:33:09 #3 type.registry] 
+New type buckets.data.Subscriber
+
+[2017-11-27 14:33:09 #4 type.registry] 
+New type buckets.Watcher
+
+[2017-11-27 14:33:09 #5 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:33:09 #6 type.registry] 
+New type java.nio.file.WatchService
+
+[2017-11-27 14:33:09 #7 type.registry] 
+New type buckets.rules.RuleSet
+
+[2017-11-27 14:33:09 #8 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+[2017-11-27 14:33:09 #9 type.registry] 
+New type buckets.data.Broadcaster
+
+[2017-11-27 14:33:09 #10 type.registry] 
+New type buckets.rules.Rule
+
+[2017-11-27 14:33:09 #11 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:33:09 #12 type.registry] 
+New type buckets.actions.Action
+
+[2017-11-27 14:33:09 #13 type.registry] 
+New type java.util.regex.Pattern
+
+[2017-11-27 14:33:09 #14 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:41:41 #15 type.registry] 
+New type buckets.actions.Move
+
+[2017-11-27 14:41:41 #16 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:41:41 #17 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2017-11-27 14:41:41 #18 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 9797@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:41:46 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 9951@blackbox
+
+[2017-11-27 14:41:46 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:41:47 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:41:47 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:41:47 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:41:47 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:41:56 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 9951@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:41:59 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 9986@blackbox
+
+[2017-11-27 14:41:59 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:42:00 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:42:00 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:42:00 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:42:00 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:42:07 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 9986@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:44:23 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10090@blackbox
+
+[2017-11-27 14:44:23 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:44:24 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:44:24 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:44:24 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:44:24 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:45:22 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10090@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:45:33 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10149@blackbox
+
+[2017-11-27 14:45:33 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:45:33 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:45:33 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:45:33 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:45:33 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:47:35 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10149@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:49:18 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10279@blackbox
+
+[2017-11-27 14:49:18 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:49:20 #3 type.registry] 
+New type buckets.data.Subscriber
+
+[2017-11-27 14:49:20 #4 type.registry] 
+New type buckets.Watcher
+
+[2017-11-27 14:49:20 #5 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:49:20 #6 type.registry] 
+New type java.nio.file.WatchService
+
+[2017-11-27 14:49:20 #7 type.registry] 
+New type buckets.rules.RuleSet
+
+[2017-11-27 14:49:20 #8 type.registry] 
+New type java.util.ArrayList<java.lang.String>
+
+[2017-11-27 14:49:20 #9 type.registry] 
+New type buckets.data.Broadcaster
+
+[2017-11-27 14:49:20 #10 type.registry] 
+New type buckets.rules.Rule
+
+[2017-11-27 14:49:20 #11 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:49:20 #12 type.registry] 
+New type buckets.actions.Action
+
+[2017-11-27 14:49:20 #13 type.registry] 
+New type java.util.regex.Pattern
+
+[2017-11-27 14:49:20 #14 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:49:38 #15 type.registry] 
+New type buckets.actions.Move
+
+[2017-11-27 14:49:38 #16 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:49:39 #17 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2017-11-27 14:49:39 #18 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10279@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:52:32 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10383@blackbox
+
+[2017-11-27 14:52:32 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:52:33 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:52:33 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:52:33 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:52:33 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:55:48 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' has been recovered (tr. 10-10)
+
+[2017-11-27 14:55:48 #2 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10476@blackbox
+
+[2017-11-27 14:55:48 #3 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:55:49 #4 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:55:49 #5 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:55:49 #6 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:55:49 #7 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:56:03 #8 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10476@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:56:06 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10526@blackbox
+
+[2017-11-27 14:56:06 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:56:06 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:56:06 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:56:07 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:56:07 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:56:11 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10526@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:56:14 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10561@blackbox
+
+[2017-11-27 14:56:14 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:56:14 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:56:15 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:56:15 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:56:15 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:56:36 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10561@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:56:39 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10601@blackbox
+
+[2017-11-27 14:56:39 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:56:40 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:56:40 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:56:40 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:56:40 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:56:48 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10601@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 14:56:51 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10638@blackbox
+
+[2017-11-27 14:56:51 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 14:56:52 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 14:56:52 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 14:56:52 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 14:56:52 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 14:57:04 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10638@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:06:29 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10753@blackbox
+
+[2017-11-27 15:06:29 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:06:29 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:06:29 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:06:29 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:06:29 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:06:44 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10753@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:06:57 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10795@blackbox
+
+[2017-11-27 15:06:57 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:06:57 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:06:57 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:06:57 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:06:57 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:07:02 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10795@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:11:10 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10937@blackbox
+
+[2017-11-27 15:11:10 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:11:11 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:11:11 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:11:11 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:11:11 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:11:23 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 10937@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:11:39 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 10997@blackbox
+
+[2017-11-27 15:11:39 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:11:40 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:11:40 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:11:40 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:11:40 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:13:39 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11106@blackbox
+
+[2017-11-27 15:13:39 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:13:39 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:13:39 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:13:40 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:13:40 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:23:56 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11264@blackbox
+
+[2017-11-27 15:23:56 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:23:56 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:23:56 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:23:56 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:23:56 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:26:08 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11344@blackbox
+
+[2017-11-27 15:26:08 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:26:08 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:26:08 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:26:08 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:26:08 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:39:29 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11532@blackbox
+
+[2017-11-27 15:39:29 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:39:29 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:39:29 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:39:29 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:39:29 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:39:45 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 11532@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:39:48 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11573@blackbox
+
+[2017-11-27 15:39:48 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:39:49 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:39:49 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:39:49 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:39:49 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:39:55 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 11573@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:42:08 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11676@blackbox
+
+[2017-11-27 15:42:08 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:42:08 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:42:08 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:42:08 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:42:08 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:42:15 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 11676@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:42:18 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11714@blackbox
+
+[2017-11-27 15:42:18 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:42:18 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:42:18 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:42:18 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:42:18 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:43:37 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11777@blackbox
+
+[2017-11-27 15:43:37 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:43:37 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:43:37 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:43:37 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:43:37 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:44:49 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11834@blackbox
+
+[2017-11-27 15:44:49 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:44:49 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:44:50 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:44:50 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:44:50 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:45:59 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11907@blackbox
+
+[2017-11-27 15:45:59 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:45:59 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:45:59 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:45:59 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:45:59 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:46:25 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 11907@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:46:59 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 11976@blackbox
+
+[2017-11-27 15:46:59 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:47:00 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:47:00 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:47:00 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:47:00 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:47:20 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 11976@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:47:29 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12018@blackbox
+
+[2017-11-27 15:47:29 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:47:29 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:47:29 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:47:29 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:47:29 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:47:44 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12018@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:47:47 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12054@blackbox
+
+[2017-11-27 15:47:47 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:47:47 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:47:47 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:47:47 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:47:47 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:47:54 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12054@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:47:57 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12091@blackbox
+
+[2017-11-27 15:47:57 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:47:57 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:47:57 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:47:57 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:47:57 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:48:04 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12091@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:48:30 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12149@blackbox
+
+[2017-11-27 15:48:30 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:48:30 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:48:30 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:48:30 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:48:30 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:51:09 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12241@blackbox
+
+[2017-11-27 15:51:09 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:51:09 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:51:09 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:51:09 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:51:09 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:51:35 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12241@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:51:39 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12285@blackbox
+
+[2017-11-27 15:51:39 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:51:39 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:51:40 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:51:40 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:51:40 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:51:47 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12285@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:51:50 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12322@blackbox
+
+[2017-11-27 15:51:50 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:51:51 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:51:51 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:51:51 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:51:51 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:52:06 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12322@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:52:10 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12364@blackbox
+
+[2017-11-27 15:52:10 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:52:10 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:52:10 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:52:10 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:52:10 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:52:35 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12364@blackbox
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-27 15:53:18 #1 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is opened by 12433@blackbox
+
+[2017-11-27 15:53:18 #2 store] 
+Configuration path: /home/mhouse/Projects/school/CS321/buckets/deps/objectdb/objectdb.conf
+
+[2017-11-27 15:53:19 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-27 15:53:19 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-27 15:53:19 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-27 15:53:19 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-27 15:53:23 #7 store] 
+Database '/home/mhouse/Projects/school/CS321/buckets/deps/objectdb/db/buckets.odb' is closed by 12433@blackbox
+

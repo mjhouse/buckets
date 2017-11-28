@@ -5,9 +5,11 @@ import javax.persistence.*;
 
 @Entity
 public class Point implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     private int x;
@@ -26,11 +28,11 @@ public class Point implements Serializable {
     }
 
     public int getX() {
-         return x;
+        return x;
     }
 
     public int getY() {
-         return y;
+        return y;
     }
 
     @Override

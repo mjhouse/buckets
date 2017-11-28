@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.*;
 
 public class Main {
+
     public static void main(String[] args) {
         // Open a database connection
         // (create a new database if it doesn't exist yet):
-        EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("$objectdb/db/points.odb");
+        EntityManagerFactory emf
+            = Persistence.createEntityManagerFactory("$objectdb/db/points.odb");
         EntityManager em = emf.createEntityManager();
 
         // Store 1000 Point objects in the database:
@@ -28,8 +29,8 @@ public class Main {
         System.out.println("Average X: " + q2.getSingleResult());
 
         // Retrieve all the Point objects from the database:
-        TypedQuery<Point> query =
-            em.createQuery("SELECT p FROM Point p", Point.class);
+        TypedQuery<Point> query
+            = em.createQuery("SELECT p FROM Point p", Point.class);
         List<Point> results = query.getResultList();
         for (Point p : results) {
             System.out.println(p);

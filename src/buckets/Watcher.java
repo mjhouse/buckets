@@ -63,8 +63,8 @@ public class Watcher implements Subscriber, Serializable {
     private long id;
 
     /**
-     *
-     * @param dirs directories to watch
+     * No-arg constructor to init the various collections within the Watcher to
+     * default values.
      */
     public Watcher() {
         broadcaster = null;
@@ -75,7 +75,9 @@ public class Watcher implements Subscriber, Serializable {
     }
 
     /**
+     * Constructor with arguments.
      *
+     * @param b the Broadcaster to subscribe/broadcast with.
      * @param dirs directories to watch
      */
     public Watcher(Broadcaster b, String... dirs) {
@@ -87,6 +89,12 @@ public class Watcher implements Subscriber, Serializable {
         init(b, dirs);
     }
 
+    /**
+     * manaually init with a Broadcaster and starting directories.
+     *
+     * @param b the Broadcaster to subscribe/broadcast with.
+     * @param dirs variable collection of String directories.
+     */
     public void init(Broadcaster b, String... dirs) {
         broadcaster = b;
         try {
@@ -99,15 +107,26 @@ public class Watcher implements Subscriber, Serializable {
         } catch (IOException e) {
         }
     }
-    
+
+    /**
+     * Another manual init method.
+     *
+     * @param b the Broadcaster to subscribe/broadcast with.
+     */
     public void init(Broadcaster b) {
         broadcaster = b;
         try {
             watcher = FileSystems.getDefault().newWatchService();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
         this.updateWatched();
     }
 
+    /**
+     * Override the Subscriber interface to receive BucketsEvents.
+     *
+     * @param e the BucketsEvent to handle.
+     */
     @Override
     public void notify(BucketsEvent e) {
         EventData data, regex, path, idx;
@@ -139,8 +158,11 @@ public class Watcher implements Subscriber, Serializable {
                 if (regex != null && path != null && this.removeRule(regex.asString(), path.asString())) {
                     this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
                 } else if (idx != null) {
-                    Boolean r = this.removeRule(idx.asInt());
-                    this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL));
+                    Rule r = this.removeRule(idx.asInt());
+                    if (r != null) {
+                        this.broadcaster.broadcast(new BucketsEvent(EventType.RULE_DEL)
+                            .add(new EventData("id", r.getId())));
+                    }
                 }
                 break;
             case EXIT:
@@ -176,10 +198,10 @@ public class Watcher implements Subscriber, Serializable {
         WatchKey key;
         while (running) {
 
-            if(backlog.size()>0){
+            if (backlog.size() > 0) {
                 ArrayList<String> rmlist = new ArrayList();
-                for(String s : backlog){
-                    if(!isChanging(s)){
+                for (String s : backlog) {
+                    if (!isChanging(s)) {
                         Path p = Paths.get(s);
                         rmlist.add(s);
                         rules.apply(p);
@@ -207,13 +229,11 @@ public class Watcher implements Subscriber, Serializable {
                     // file name.
                     Path abspath = dir.resolve(ev.context());
                     String abstr = abspath.toString();
-                    if(!isChanging(abstr)){
+                    if (!isChanging(abstr)) {
                         // do something with the absolute path.
-                        rules.apply(abspath);   
-                    } else {
-                        if(!backlog.contains(abstr)){
-                            backlog.add(abstr);
-                        }
+                        rules.apply(abspath);
+                    } else if (!backlog.contains(abstr)) {
+                        backlog.add(abstr);
                     }
                 } else {
                     key.cancel();
@@ -227,24 +247,23 @@ public class Watcher implements Subscriber, Serializable {
         }
     }
 
-    private Boolean isChanging( String p ){
+    private Boolean isChanging(String p) {
         try {
             File file = new File(p);
             long first = file.lastModified();
-            Thread.sleep(4000);   
+            Thread.sleep(4000);
             long last = file.lastModified();
-            if(last==first){
+            if (last == first) {
                 return false;
             }
             return true;
-        } catch (InterruptedException err){
+        } catch (InterruptedException err) {
             return true;
         }
     }
-    
-    /* ---------------------------------------------------------------------- */
- /* Getters/Setters */
+
     /**
+     * Get watched directories.
      *
      * @return the directories being watched
      */
@@ -253,6 +272,7 @@ public class Watcher implements Subscriber, Serializable {
     }
 
     /**
+     * Set watched directories.
      *
      * @param p paths to begin watching
      */
@@ -261,8 +281,10 @@ public class Watcher implements Subscriber, Serializable {
     }
 
     /**
+     * Add a new directory to watch.
      *
-     * @param p path to begin watching
+     * @param s path to watch
+     * @return whether path was successfully added.
      */
     public Boolean addWatched(String s) {
         if (!directories.contains(s)) {
@@ -278,8 +300,12 @@ public class Watcher implements Subscriber, Serializable {
         return false;
     }
 
-    public void updateWatched(){
-        for(String s : directories){
+    /**
+     * Register to get modify and create events for the current set of
+     * directories.
+     */
+    public void updateWatched() {
+        for (String s : directories) {
             try {
                 Path p = Paths.get(s);
                 p.register(watcher, ENTRY_CREATE, ENTRY_MODIFY);
@@ -288,10 +314,12 @@ public class Watcher implements Subscriber, Serializable {
             }
         }
     }
-    
+
     /**
+     * Remove a given path.
      *
-     * @param p path to stop watching
+     * @param s path to remove.
+     * @return whether path was removed.
      */
     public Boolean removeWatched(String s) {
         if (directories.contains(s)) {
@@ -302,16 +330,18 @@ public class Watcher implements Subscriber, Serializable {
     }
 
     /**
+     * Get the WatchService.
      *
-     * @return the watchservice being used
+     * @return the WatchService being used
      */
     public WatchService getWatcher() {
         return watcher;
     }
 
     /**
+     * Set a new WatchService.
      *
-     * @param w set a new watcher
+     * @param w the WatchService to use.
      */
     public void setWatcher(WatchService w) {
         watcher = w;
@@ -335,17 +365,37 @@ public class Watcher implements Subscriber, Serializable {
         rules = r;
     }
 
+    /**
+     * Create and add a new Rule.
+     *
+     * @param r rule pattern.
+     * @param p the rule path.
+     * @return whether the rule was added.
+     */
     public Boolean addRule(String r, String p) {
         Rule rule = new Rule(r, new Move(p));
         return rules.add(rule);
     }
 
+    /**
+     * Remove a Rule.
+     *
+     * @param r the rule pattern.
+     * @param p the rule path.
+     * @return whether the rule was removed.
+     */
     public Boolean removeRule(String r, String p) {
         Rule rule = new Rule(r, new Move(p));
         return rules.remove(rule);
     }
 
-    public Boolean removeRule(Integer idx) {
+    /**
+     * Remove a Rule by index.
+     *
+     * @param idx index of rule to remove.
+     * @return the removed rule.
+     */
+    public Rule removeRule(Integer idx) {
         return rules.remove(idx);
     }
 

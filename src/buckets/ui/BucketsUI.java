@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package buckets.ui;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import buckets.data.events.*;
 import buckets.rules.RuleSet;
 import buckets.rules.Rule;
@@ -15,61 +15,88 @@ import buckets.data.Subscriber;
 
 import javax.swing.JFileChooser;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import javax.swing.event.ListSelectionListener;
 
 /**
+ * The UI for Buckets.
  *
  * @author mhouse
  */
 public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSelectionListener {
-	private final Broadcaster broadcaster;
-	
+
+    private final Broadcaster broadcaster;
+
     /**
      * Creates new form BucketsUI
+     *
+     * @param b
      */
-    public BucketsUI(Broadcaster b) {        
+    public BucketsUI(Broadcaster b) {
         initComponents();
         broadcaster = b;
     }
-    
-    public void initCustom(){
+
+    /**
+     * Does a lot of custom inits and tweaks outside of the constructors.
+     */
+    public void initCustom() {
         watchList.addListSelectionListener(this);
-	ruleList.addListSelectionListener(this);
-		
-	System.setProperty("awt.useSystemAAFontSettings","on");
-	System.setProperty("swing.aatext", "true");
-        
+        ruleList.addListSelectionListener(this);
+
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
+
         moveToEntry.setForeground(Color.BLACK);
         moveToEntry.setPlaceholderForeground(Color.GRAY);
         moveToEntry.setPlaceholder("Directory to move files to");
-        
+
         regexEntry.setForeground(Color.BLACK);
         regexEntry.setPlaceholderForeground(Color.GRAY);
         regexEntry.setPlaceholder("RegEx");
-        
+
         watchDirectoryInput.setForeground(Color.BLACK);
         watchDirectoryInput.setPlaceholderForeground(Color.GRAY);
         watchDirectoryInput.setPlaceholder("Directory to watch");
     }
-    
-    public void valueChanged(javax.swing.event.ListSelectionEvent e){
+
+    /**
+     * Handle for selection events in the watch directory tab.
+     *
+     * @param e the ListSelectionEvent to respond to.
+     */
+    public void valueChanged(javax.swing.event.ListSelectionEvent e) {
         String selected = watchList.getSelectedValue();
         watchDirectoryInput.setText(selected);
     }
-    
+
+    /**
+     * Implementation for the Subscriber interface.
+     *
+     * @param e an event to react to.
+     */
     @Override
-    public void notify ( BucketsEvent e ) {}
-    
-    public void setDirectories( ArrayList<String> paths ){
+    public void notify(BucketsEvent e) {
+    }
+
+    /**
+     * Set the list of watched directories in the ui.
+     *
+     * @param paths an ArrayList of String paths to set in the ui.
+     */
+    public void setDirectories(ArrayList<String> paths) {
         watchList.setListData(paths.stream()
             .toArray(String[]::new));
     }
-    
-    public void setRules( RuleSet rules ){
-        ArrayList<Rule> r = rules.asList();  
+
+    /**
+     * Set the visible rules.
+     *
+     * @param rules update the list of rules in the ui.
+     */
+    public void setRules(RuleSet rules) {
+        ArrayList<Rule> r = rules.asList();
         ruleList.setListData(r.stream()
             .map(p -> p.toString())
             .toArray(String[]::new));
@@ -313,8 +340,8 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }// </editor-fold>//GEN-END:initComponents
 
     private void watchRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchRemoveActionPerformed
-		BucketsEvent e = new BucketsEvent(EventType.DEL_DIRECTORY)
-			.add(new EventData("path",watchDirectoryInput.getText()));
+        BucketsEvent e = new BucketsEvent(EventType.DEL_DIRECTORY)
+            .add(new EventData("path", watchDirectoryInput.getText()));
         broadcaster.broadcast(e);
     }//GEN-LAST:event_watchRemoveActionPerformed
 
@@ -327,9 +354,9 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }//GEN-LAST:event_watchDirectoryPickerActionPerformed
 
     private void watchAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchAddActionPerformed
-		BucketsEvent e = new BucketsEvent(EventType.ADD_DIRECTORY)
-			.add(new EventData("path",watchDirectoryInput.getText()));
-		
+        BucketsEvent e = new BucketsEvent(EventType.ADD_DIRECTORY)
+            .add(new EventData("path", watchDirectoryInput.getText()));
+
         broadcaster.broadcast(e);
     }//GEN-LAST:event_watchAddActionPerformed
 
@@ -342,19 +369,19 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRuleBtnActionPerformed
-		BucketsEvent e = new BucketsEvent(EventType.ADD_RULE)
-			.add(new EventData("regex",regexEntry.getText()))
-			.add(new EventData("path",moveToEntry.getText()));
-		
+        BucketsEvent e = new BucketsEvent(EventType.ADD_RULE)
+            .add(new EventData("regex", regexEntry.getText()))
+            .add(new EventData("path", moveToEntry.getText()));
+
         broadcaster.broadcast(e);
     }//GEN-LAST:event_addRuleBtnActionPerformed
 
     private void removeRuleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRuleBtnActionPerformed
-		int nsel = ruleList.getSelectedIndex();
-		
-		BucketsEvent e = new BucketsEvent(EventType.DEL_RULE)
-			.add(new EventData("index",nsel));
-		
+        int nsel = ruleList.getSelectedIndex();
+
+        BucketsEvent e = new BucketsEvent(EventType.DEL_RULE)
+            .add(new EventData("index", nsel));
+
         broadcaster.broadcast(e);
     }//GEN-LAST:event_removeRuleBtnActionPerformed
 
@@ -362,8 +389,7 @@ public class BucketsUI extends javax.swing.JFrame implements Subscriber, ListSel
         BucketsEvent e = new BucketsEvent(EventType.EXIT);
         broadcaster.broadcast(e);
     }//GEN-LAST:event_formWindowClosing
-    
-	
+
     /**
      * @param args the command line arguments
      */

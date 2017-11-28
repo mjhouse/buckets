@@ -10,14 +10,45 @@ package buckets.data.events;
  * @author mhouse
  */
 public enum EventType {
-	ADD_DIRECTORY,
-	DEL_DIRECTORY,
-	DIRECTORY_DEL,
-	DIRECTORY_ADD,
-	ADD_RULE,
-	DEL_RULE,
-	RULE_DEL,
-	RULE_ADD,
-	INIT_ALL,
-        EXIT,
+
+    /**
+     * Requested add directory.
+     */
+    ADD_DIRECTORY,
+    /**
+     * Requested delete directory.
+     */
+    DEL_DIRECTORY,
+    /**
+     * Directory deleted.
+     */
+    DIRECTORY_DEL,
+    /**
+     * Directory added.
+     */
+    DIRECTORY_ADD,
+    /**
+     * Requested add rule.
+     */
+    ADD_RULE,
+    /**
+     * Requested delete rule.
+     */
+    DEL_RULE,
+    /**
+     * Rule deleted.
+     */
+    RULE_DEL,
+    /**
+     * Rule added.
+     */
+    RULE_ADD,
+    /**
+     * Initialize everything (on start).
+     */
+    INIT_ALL,
+    /**
+     * Shutdown everything (on exit).
+     */
+    EXIT,
 }

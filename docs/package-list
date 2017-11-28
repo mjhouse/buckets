@@ -1,3 +1,6 @@
 buckets
 buckets.actions
+buckets.data
+buckets.data.events
 buckets.rules
+buckets.ui
