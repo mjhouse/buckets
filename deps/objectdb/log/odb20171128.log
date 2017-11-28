@@ -1,0 +1,138 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:25:49 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 14124@Dipen
+
+[2017-11-28 13:25:49 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:25:49 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:25:49 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:25:49 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:25:50 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:26:02 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 14124@Dipen
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:26:32 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 13488@Dipen
+
+[2017-11-28 13:26:32 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:26:32 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:26:32 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:26:32 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:26:32 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:26:37 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 13488@Dipen
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:27:36 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 14800@Dipen
+
+[2017-11-28 13:27:36 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:27:36 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:27:36 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:27:37 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:27:37 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:27:44 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 14800@Dipen
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:29:29 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 14984@Dipen
+
+[2017-11-28 13:29:29 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:29:29 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:29:29 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:29:29 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:29:29 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:29:35 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 14984@Dipen
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:30:39 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 11908@Dipen
+
+[2017-11-28 13:30:39 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:30:40 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:30:40 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:30:40 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:30:40 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:30:50 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 11908@Dipen
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-28 13:31:10 #1 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is opened by 3364@Dipen
+
+[2017-11-28 13:31:10 #2 store] 
+Configuration path: C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\objectdb.conf
+
+[2017-11-28 13:31:10 #3 type] 
+Type buckets.Watcher is not enhanced.
+
+[2017-11-28 13:31:10 #4 type] 
+Type buckets.rules.Rule is not enhanced.
+
+[2017-11-28 13:31:10 #5 type] 
+Type buckets.actions.Action is not enhanced.
+
+[2017-11-28 13:31:10 #6 type] 
+Type buckets.actions.Move is not enhanced.
+
+[2017-11-28 13:32:43 #7 store] 
+Database 'C:\Users\Dipen\Documents\COLLEGE\CS 321\buckets\deps\objectdb\db\buckets.odb' is closed by 3364@Dipen
+

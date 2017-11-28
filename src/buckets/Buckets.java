@@ -31,8 +31,7 @@ public class Buckets {
         log.info("starting Buckets");
 
         try {
-            String jarPath = Buckets.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-            Path dir = Paths.get(URLDecoder.decode(jarPath, "UTF-8")).getParent().resolve("buckets.log");
+            Path dir = Paths.get("").toAbsolutePath().resolve("buckets.log");
             log.addHandler(new FileHandler(dir.toString()));
         }
         catch (IOException e) {
